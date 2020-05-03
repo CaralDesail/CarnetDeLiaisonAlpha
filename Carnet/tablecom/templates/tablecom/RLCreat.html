@@ -1,0 +1,10 @@
+<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head> <br>
+
+{% if envoi %}Le responsable légal à bien été créé ! <br><br><br>{% endif %}
+
+<form action="{% url 'RLCreat' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Valider" />
+</form>

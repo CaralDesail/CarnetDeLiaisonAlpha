@@ -1,0 +1,16 @@
+<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head>
+
+
+<h1>Liste des carnets</h1><br>
+
+{% for carnet in liste_carnets %}
+
+    	<h3>{{ carnet.name }} {{ carnet.forename }}</h3>
+    	<p> Date de naissance : {{carnet.date_of_birth}} || Numéro SS : {{carnet.num_ident}} </p>
+        <p><a href="{% url 'ChildSNotebookVisu' carnet.id %}">Ouvrir le carnet</a></p>
+        <br>
+
+{% empty %}
+    <p>Aucun carnet.</p>
+{% endfor %}

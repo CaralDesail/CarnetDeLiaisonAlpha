@@ -1,0 +1,30 @@
+<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head>
+
+
+<h1>{{ carnet.name }} {{ carnet.forename }} <span class="small"> né(e) le {{carnet.date_of_birth}}</span></h1>
+
+<p class="infos">{{carnet.num_ident}}</p>
+
+<br>
+
+Liste des professionnels :
+
+{% for prof in newListOfProf %}
+    <h4> {{prof.first_name}} {{prof.last_name}}</h4> {{prof.email}}
+
+    {% empty %}
+        <p>Aucun professionnel trouvé.</p>
+{% endfor %}
+
+<br><br><br>
+
+Liste des articles :
+
+{% for article in newListOfArticles %}
+    <h4> {{article.title}} </h4> {{article.date}}
+    <p>{{article.content}}</p>
+
+    {% empty %}
+        <p>Aucun article trouvé.</p>
+{% endfor %}
