@@ -78,3 +78,13 @@ def ChildSNotebookVisu(request,id_carnet):
     newListOfArticles=list_of_articles(listArticlesString)
 
     return render(request, 'tablecom/ChildSNotebook.html', locals())
+
+def NewArticle(request,id_carnet):
+    form = NewArticleForm(request.POST or None)
+    # print(form.Categorie_Professionnelle)
+    if form.is_valid():
+        print("Formulaire validé")
+        envoi = True
+        form.save()
+
+    return render(request, 'tablecom/NewArticle.html', locals())

@@ -8,6 +8,7 @@ urlpatterns = [
     path('Connexion', views.connexion,name="connexion"),
     path('Deconnexion', views.deconnexion, name="deconnexion"),
     path('Carnets',views.ChildSNotebookListVisu, name="ChildSNotebookListVisu"),
-    path('CarnetVisu/<id_carnet>',views.ChildSNotebookVisu, name="ChildSNotebookVisu")
+    path('CarnetVisu/<id_carnet>',views.ChildSNotebookVisu, name="ChildSNotebookVisu"),
+    path('NewArticle/<id_carnet>',views.NewArticle, name="NewArticle"),
 
 ]

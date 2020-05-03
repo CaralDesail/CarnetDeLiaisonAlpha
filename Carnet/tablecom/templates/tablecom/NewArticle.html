@@ -1,0 +1,11 @@
+<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head> <br>
+
+
+{% if envoi %}L'article à bien été créé !{% endif %}
+
+<form action="{% url 'NewArticle' id_carnet %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Valider" />
+</form>

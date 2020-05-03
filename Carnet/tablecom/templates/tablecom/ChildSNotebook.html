@@ -17,9 +17,11 @@ Liste des professionnels :
         <p>Aucun professionnel trouvé.</p>
 {% endfor %}
 
-<br><br><br>
+<br><br>
 
-Liste des articles :
+<p><a href="{% url 'NewArticle' carnet.id %}">Ecrire nouvelle transmission</a></p>
+
+Dernières transmissions :
 
 {% for article in newListOfArticles %}
     <h4> {{article.title}} </h4> {{article.date}}

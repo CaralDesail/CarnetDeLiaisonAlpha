@@ -43,3 +43,9 @@ class RLCreatForm(UserCreationForm):
 class ConnexionForm(forms.Form):
     username = forms.CharField(label="Nom d'utilisateur", max_length=30)
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
+
+class NewArticleForm(forms.ModelForm):
+    class Meta :
+        model = Article
+        fields = '__all__'
+        #fields = ('username', 'first_name','last_name','email',)
