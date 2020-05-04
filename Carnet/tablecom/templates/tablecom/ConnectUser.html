@@ -6,6 +6,8 @@
 
 {% if user.is_authenticated %}
 Vous êtes connecté, {{ user.username }} !
+<meta http-equiv="REFRESH" content="1;url=accueil">
+
 {% else %}
 <form method="post" action="{% url 'connexion' %}">
     {% csrf_token %}

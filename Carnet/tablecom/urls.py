@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('accueil', views.home),
+    path('', views.home, name='accueil'),
+    path('accueil', views.home, name='accueil'),
     path('ProCreat', views.ProCreatView, name='ProCreat'),
     path('RLCreat',views.RLCreatView,name="RLCreat"),
     path('Connexion', views.connexion,name="connexion"),

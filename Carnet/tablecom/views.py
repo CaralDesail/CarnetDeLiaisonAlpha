@@ -11,9 +11,12 @@ from .modules_complementaires import *
 # Create your views here.
 
 def home(request):
-    return render(request,'tablecom/accueil_tablecom.html',{'date': datetime.now()})
-
-
+    date=datetime.now()
+    #CurrentUserP=request.user  // not used because "user" can be called directly in template : no need to call it
+    #print(CurrentUserP.username)
+    groupQS=request.user.groups.all()
+    userGroupName=groupQS[0].name
+    return render(request,'tablecom/accueil_tablecom.html',locals())
 
 def connexion(request):
     error = False

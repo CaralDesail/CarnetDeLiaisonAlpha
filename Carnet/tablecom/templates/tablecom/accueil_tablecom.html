@@ -1,3 +1,7 @@
+<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +11,22 @@
 <body>
 
 <p>La date actuelle est : {{ date }}</p>
+
+
+    {% if user.is_authenticated %}
+        <h3>Vous êtes connecté, {{ user.username }} !</h3>
+        Groupe : {{userGroupName}}
+
+         <p><a href="{% url 'deconnexion' %}">Se déconnecter</a></p>
+
+        <p>test
+        </p>
+
+    {% else %}
+        Vous n'êtes pas connecté
+        <br><br>
+        <p><a href="{% url 'connexion' %}">Se connecter</a></p>
+    {% endif %}
 
 </body>
 </html>

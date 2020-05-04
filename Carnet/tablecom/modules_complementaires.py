@@ -1,4 +1,5 @@
 from .forms import *
+from django.http import request
 
 def list_of_prof(listStringId):
     print("Liste en string : ",listStringId)
@@ -34,3 +35,4 @@ def list_of_articles(string_of_articles):
             return None
 
     return NewListArticles
+
