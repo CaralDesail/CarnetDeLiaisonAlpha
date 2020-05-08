@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    {% block head %}
+<html lang="fr">
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css">
+
+
+   <title>{% block title %}Titre de la page{% endblock %}</title>
+</head>
+    {% endblock %}
+<body>
+
+    <nav>
+       {% block nav %}
+
+            {% if user.is_authenticated %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-1" style="background-color:white;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSJubvac5LtNOwJtYNtNx6m67AKuexoQ3KxfZJxjtdkVQPaaN0c&usqp=CAU" class="img-responsive" max-width:10% alt="Responsive image"></div>
+    <div class="col-sm-2" style="background-color:white;"><a href="{% url 'accueil' %}"><button type="button" class="btn btn-primary">Accueil</button></a></div>
+    <div class="col-sm-4" style="background-color:white;"><a href="{% url 'accueil' %}"><button type="button" class="btn btn-secondary">Vous avez aucun message en attente</button></a></div>
+    <div class="col-sm-4" style="background-color:white;"><a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger">Se déconnecter</button></a></div>
+  </div>
+</div>
+            {% else %}
+        <div class="container">
+                <a href="{% url 'connexion' %}"><button type="button" class="btn btn-primary">Se connecter</button></a>
+        </div>
+            {% endif %}
+
+       {% endblock %}
+   </nav>
+
+    {% block content %}Contenu à introduire{% endblock %}
+
+
+
+</body>
+</html>

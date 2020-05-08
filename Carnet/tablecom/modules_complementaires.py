@@ -1,5 +1,6 @@
 from .forms import *
 from django.http import request
+from .models import *
 
 def list_of_prof(listStringId):
     print("Liste en string : ",listStringId)
@@ -36,3 +37,13 @@ def list_of_articles(string_of_articles):
 
     return NewListArticles
 
+def PermCreationAccessLastEntry(model_transmis):
+    #ok quite complicated : this function will be called at each new CSNB creation, will catch last entry and create
+    #a permition to last item of "model_transmis".
+    lastId=model_transmis.objects.all().order_by('-id')[0].id
+    content_type = ContentType.objects.get_for_model(model_transmis)
+    permission = Permission.objects.create(
+        codename='CSNB{0}_access'.format(lastId),
+        name='Acces to CSNB number {0}'.format(lastId),
+        content_type=content_type,
+    )

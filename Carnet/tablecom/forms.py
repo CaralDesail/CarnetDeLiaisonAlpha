@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 
 class ProCreatForm(UserCreationForm):
     Categorie_Professionnelle = forms.ModelChoiceField(queryset=CategoriePro.objects.all())
@@ -47,5 +49,11 @@ class ConnexionForm(forms.Form):
 class NewArticleForm(forms.ModelForm):
     class Meta :
         model = Article
+        #fields = '__all__'
+        fields = ('title', 'content','list_to_notify',)
+
+class ChildSNotebookCreatForm(forms.ModelForm):
+    class Meta:
+        model = ChildSNotebook
         fields = '__all__'
-        #fields = ('username', 'first_name','last_name','email',)
+

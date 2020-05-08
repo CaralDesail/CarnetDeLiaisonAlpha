@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.conf.urls import include, url
+from django.views.generic import *
+from .models import ChildSNotebook
 
 urlpatterns = [
     path('', views.home, name='accueil'),
@@ -10,6 +13,9 @@ urlpatterns = [
     path('Deconnexion', views.deconnexion, name="deconnexion"),
     path('Carnets',views.ChildSNotebookListVisu, name="ChildSNotebookListVisu"),
     path('CarnetVisu/<id_carnet>',views.ChildSNotebookVisu, name="ChildSNotebookVisu"),
+    path('NewCSNB', views.ChildSNotebookCreatView, name="ChildSNotebookCreatView"),
     path('NewArticle/<id_carnet>',views.NewArticle, name="NewArticle"),
-
+    path('AdminTools',views.AdminTools, name="AdminTools"),
+    path('AdminTools_PermissionCarnetRecreation',views.AdminTools_PermissionCarnetRecreation,name="AdminTools_PermissionCarnetRecreation"),
+    path('baseHTML', TemplateView.as_view(template_name="tablecom/base.html"))
 ]

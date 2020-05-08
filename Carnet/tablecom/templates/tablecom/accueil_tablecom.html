@@ -1,32 +1,66 @@
-<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head>
-
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil TableCom</title>
-</head>
-<body>
 
-<p>La date actuelle est : {{ date }}</p>
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
 
-
+{% block content %}
     {% if user.is_authenticated %}
-        <h3>Vous êtes connecté, {{ user.username }} !</h3>
-        Groupe : {{userGroupName}}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>La date actuelle est : {{ date }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Vous êtes connecté, {{ user.username }} !</h3>
+                <p class="lead">Groupe : {{userGroupName}}</p>
+                </div>
+            <div class="col">
+                <p><a href="{% url 'ChildSNotebookListVisu' %}"><button type="button" class="btn btn-primary">Carnets</button></a>
+                </p>
+            </div>
+            <div class="col">
+                 <p><a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-outline-danger btn-warning">Se déconnecter</button></a></p>
+            </div>
+        </div>
+</div>
 
-         <p><a href="{% url 'deconnexion' %}">Se déconnecter</a></p>
+        {% else %}
 
-        <p>test
-        </p>
+             <div class="container">
+        <div class="row">
+            <div class="col">
+                <p></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Veuillez vous connecter. </h4>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Si vous n'avez pas de compte, contactez nous. </h4>
+                </div>
+        </div>
+</div>
 
-    {% else %}
-        Vous n'êtes pas connecté
-        <br><br>
-        <p><a href="{% url 'connexion' %}">Se connecter</a></p>
-    {% endif %}
+        {% endif %}
 
-</body>
-</html>
+        {% if user.is_superuser %}<br><br>
+    <div class="container">
+    Acces super user :<br><br>
+            <p><a href="{% url 'ProCreat' %}"><button type="button" class="btn btn-info">Nouveau professionnel</button></a>
+            </p>
+            <p><a href="{% url 'RLCreat' %}"><button type="button" class="btn btn-info">Nouveau responsable légal</button></a>
+            </p>
+            <p><a href="{% url 'ChildSNotebookCreatView' %}"><button type="button" class="btn btn-info">Nouveau carnet de liaison</button></a>
+            </p>
+
+    <br>
+            <p><a href="{% url 'AdminTools' %}"><button type="button" class="btn btn-info">AdminTools</button></a>
+            </p>
+    </div>
+        {% endif %}
+{% endblock %}

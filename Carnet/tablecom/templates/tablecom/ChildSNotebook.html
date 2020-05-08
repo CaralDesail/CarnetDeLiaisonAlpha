@@ -1,6 +1,10 @@
-<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head>
+<!DOCTYPE html>
 
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+<div class="container">
 
 <h1>{{ carnet.name }} {{ carnet.forename }} <span class="small"> né(e) le {{carnet.date_of_birth}}</span></h1>
 
@@ -8,25 +12,51 @@
 
 <br>
 
-Liste des professionnels :
+    <table class="table-sm">
 
-{% for prof in newListOfProf %}
-    <h4> {{prof.first_name}} {{prof.last_name}}</h4> {{prof.email}}
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Liste des professionnels</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
 
-    {% empty %}
-        <p>Aucun professionnel trouvé.</p>
-{% endfor %}
+      <tbody>
+        {% for prof in newListOfProf %}
+        <tr>
+          <th scope="row">{{prof.id}}</th>
+          <td><h4> {{prof.first_name}} {{prof.last_name}}</h4></td>
+          <td>{{prof.email}}</td>
+
+
+
+                {% empty %}
+            <p>Aucun professionnel trouvé.</p>
+            {% endfor %}
+        </tr>
+      </tbody>
+
+    </table>
+<br><br>
+
+<p><a href="{% url 'NewArticle' carnet.id %}"><button type="button" class="btn btn-primary">Ecrire nouvelle transmission</button></a></p>
+
+
 
 <br><br>
 
-<p><a href="{% url 'NewArticle' carnet.id %}">Ecrire nouvelle transmission</a></p>
+    <h3>Dernières transmissions </h3>
+<div class="list-group">
 
-Dernières transmissions :
 
-{% for article in newListOfArticles %}
-    <h4> {{article.title}} </h4> {{article.date}}
-    <p>{{article.content}}</p>
+    {% for article in newListOfArticles %}
+    <a href="" class="list-group-item list-group-item-action">    <h4> {{article.title}} </h4> {{article.date}}
+        <p>{{article.content}}</p> </a>
 
     {% empty %}
         <p>Aucun article trouvé.</p>
 {% endfor %}
+</div></div>
+{% endblock %}
