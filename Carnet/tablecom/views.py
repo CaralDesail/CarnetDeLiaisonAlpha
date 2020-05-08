@@ -10,11 +10,6 @@ from .modules_complementaires import *
 from .admin_compl_tools import *
 from .permissions import *
 
-from django.contrib.auth.models import Permission
-from django.contrib.contenttypes.models import ContentType
-
-# Create your views here.
-
 def home(request):
     date=datetime.now()
     #CurrentUserP=request.user  // not used because "user" can be called directly in template : no need to call it
@@ -150,6 +145,10 @@ def AdminTools_PermissionCarnetRecreation(request): #will regenerate all permiss
     PermCreationAllEntry(ChildSNotebook)
     return render(request,'tablecom/AdminTools.html',locals())
 
+def AdminTools_PermCoherenceAll(request):
+    PermCoherenceAll()
+    return render(request, 'tablecom/AdminTools.html', locals())
+
 @permission_required('auth.change_permission')
 def PermissionsManagement_Main(request):
     ChildSNBs=list(ChildSNotebook.objects.all().order_by("-pk"))
@@ -167,7 +166,13 @@ def PermissionsManagement_Detail(request,id_carnet):
         roleProNum=Profil.objects.get(user_id=userPro.pk).rolePro_id #get for each user the number of rolepro
         nameRole = CategoriePro.objects.get(id=roleProNum).name
         listaccessPro.append((userPro, accesbool, nameRole))
+
     usersRL=User.objects.filter(groups="3") #group 3 is "Legal Responsibles"
+    listaccessRL = []
+    for userRL in usersRL:
+        accesboolRL = userRL.has_perm("tablecom.CSNB{0}_access".format(id_carnet))
+        roleRL = Profil.objects.get(user_id=userRL.pk).statusRL
+        listaccessRL.append((userRL, accesboolRL, roleRL))
 
     return render(request, 'tablecom/PermissionsManagement_Detail.html', locals())
 
@@ -177,8 +182,8 @@ def PermissionsManagement_Action (request, id_carnet, id_user, action):
     carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
     if action=="Allow":
         PermAllower(id_carnet,id_user)
+
     if action=="Remove":
         PermRemover(id_carnet,id_user)
-
     return redirect('PermissionsManagement_Detail', id_carnet=id_carnet)
 

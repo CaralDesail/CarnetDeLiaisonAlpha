@@ -55,5 +55,6 @@ class NewArticleForm(forms.ModelForm):
 class ChildSNotebookCreatForm(forms.ModelForm):
     class Meta:
         model = ChildSNotebook
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ('name','forename','date_of_birth','num_ident')
 

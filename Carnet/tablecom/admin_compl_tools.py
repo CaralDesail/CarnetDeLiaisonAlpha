@@ -2,6 +2,7 @@ from .forms import *
 from django.http import request
 from .models import *
 from django.db.models import Max
+from .permissions import *
 
 
 def PermCreationOneEntry(model_transmis, IdToCreate):
@@ -28,4 +29,8 @@ def PermCreationAllEntry(model_transmis):
             print("Entrée {0} non créée".format(idTest))
 
 
-
+def PermCoherenceAll():
+    #this function will be called to maintain coherence between different permissions and what is wroten into CSNB
+    print("Hello")
+    for carnet in ChildSNotebook.objects.all():
+        PermStateCoherenceToCSNB(carnet.id)

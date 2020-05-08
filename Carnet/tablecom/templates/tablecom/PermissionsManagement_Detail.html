@@ -2,24 +2,84 @@
 {% block title %}Gestionnaire de permissions{% endblock %}
 {% block content %}
 
+<div class="container">
 <br>
 
 <H3>Permissions d'acces au carnet de {{ carnet.forename }} {{ carnet.name }}</H3>
 <H4>Professionnels :</H4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Etat</th>
+    </tr>
+  </thead>
+    <tbody>
 {% for Pro, value, rolepro in listaccessPro %}
-<br>
-{{ rolepro }} || {{ Pro.first_name }} || {{ Pro.last_name }}  : || Accès : {{ value }}
-{% if value == True %}
-Acces ok ||
-<a href="{% url 'PermissionsManagement_Action' carnet.id Pro.pk 'Remove' %}">Retirer l'accès</a>
-{% else %}
-Pas d'acces ||
-<a href="{% url 'PermissionsManagement_Action' carnet.id Pro.pk 'Allow' %}">Accorder l'accès</a>
+    <tr>
+      <th scope="row">{{ rolepro }}</th>
+      <td>{{ Pro.first_name }}</td>
+      <td>{{ Pro.last_name }}</td>
+      <td>
+         Accès : {{ value }}
+        {% if value == True %}
+        Acces ok ||
+        <a href="{% url 'PermissionsManagement_Action' carnet.id Pro.pk 'Remove' %}">Retirer l'accès</a>
+        {% else %}
+        Pas d'acces ||
+        <a href="{% url 'PermissionsManagement_Action' carnet.id Pro.pk 'Allow' %}">Accorder l'accès</a>
+      </td>
+    </tr>
 {% endif %}
 
 {% empty %}
     <p>Aucun profesionnel.</p>
 {% endfor %}
+  </tbody>
+</table>
+
+<br>
+
+<H4>Responsables légaux :</H4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Etat</th>
+    </tr>
+  </thead>
+    <tbody>
+
+{% for RL, valueRL, roleRL in listaccessRL %}
+<tr>
+      <th scope="row">{{ roleRL }}</th>
+      <td>{{ RL.first_name }}</td>
+      <td>{{ RL.last_name }}</td>
+      <td>
+        Accès : {{ valueRL }}
+        {% if valueRL == True %}
+        Acces ok ||
+        <a href="{% url 'PermissionsManagement_Action' carnet.id RL.pk 'Remove' %}">Retirer l'accès</a>
+        {% else %}
+        Pas d'acces ||
+        <a href="{% url 'PermissionsManagement_Action' carnet.id RL.pk 'Allow' %}">Accorder l'accès</a>
+      </td>
+    </tr>
+
+{% endif %}
+
+{% empty %}
+    <p>Aucun responsable légal.</p>
+{% endfor %}
+  </tbody>
+</table>
 
 
 {% endblock %}
+</div>

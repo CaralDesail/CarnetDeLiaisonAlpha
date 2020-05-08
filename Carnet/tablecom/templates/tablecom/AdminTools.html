@@ -18,7 +18,7 @@
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td><a href="{% url 'AdminTools_PermissionCarnetRecreation' %}">Lien </a>
+      <td><a class="btn btn-primary" href="{% url 'AdminTools_PermissionCarnetRecreation' %}">Lien </a>
 </td>
       <td>Va créer tous les marqueurs de permission d'accès pour chaque ID de Carnet</td>
       <td>Nécessite l'accès à la modification de permissions.
@@ -26,9 +26,9 @@
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td><a class="btn btn-primary" href="{% url 'AdminTools_PermCoherenceAll' %}">Lien </a></td>
+      <td>Va refaire un tour de toutes les permissions de tous les carnets pour vérifier la cohérence entre celles-ci et ce qui est marqué dans la table CSNB</td>
+      <td>Nécessite l'accès à la modification de permissions.</td>
     </tr>
     <tr>
       <th scope="row">3</th>

@@ -1,15 +1,22 @@
-<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head> <br>
+<!DOCTYPE html>
 
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+
+<div class="container">
 
 {% if envoi %}
 Le professionnel à bien été créé !
 <meta http-equiv="REFRESH" content="1;url=accueil">
 {% else %}
+    <h3>Nouveau professionnel</h3>
 <form action="{% url 'ProCreat' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Valider" />
-</form>
+</form></div>
 
 {% endif %}
+{% endblock %}

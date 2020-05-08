@@ -1,11 +1,18 @@
-<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head> <br>
+<!DOCTYPE html>
 
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
 
 {% if envoi %}Le carnet à bien été créé !{% endif %}
+<div class="container">
+
+    <h3>Nouveau carnet</h3>
 
 <form action="{% url 'ChildSNotebookCreatView' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Valider" />
-</form>
+</form></div>
+{% endblock %}

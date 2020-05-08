@@ -17,6 +17,8 @@ urlpatterns = [
     path('NewArticle/<id_carnet>',views.NewArticle, name="NewArticle"),
     path('AdminTools',views.AdminTools, name="AdminTools"),
     path('AdminTools_PermissionCarnetRecreation',views.AdminTools_PermissionCarnetRecreation,name="AdminTools_PermissionCarnetRecreation"),
+    path('AdminTools_PermCoherenceAll', views.AdminTools_PermCoherenceAll,
+         name="AdminTools_PermCoherenceAll"),
     path('PermissionsManagement_Main', views.PermissionsManagement_Main, name="PermissionsManagement_Main"),
     path('PermissionsManagement_Detail/<id_carnet>', views.PermissionsManagement_Detail, name="PermissionsManagement_Detail"),
     path('PermissionsManagement_Action/<id_carnet>/<id_user>/<action>', views.PermissionsManagement_Action, name="PermissionsManagement_Action"),

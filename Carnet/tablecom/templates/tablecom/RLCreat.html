@@ -1,10 +1,17 @@
-<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head> <br>
+<!DOCTYPE html>
 
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+
+<div class="container">
 {% if envoi %}Le responsable légal à bien été créé ! <br><br><br>{% endif %}
-
+<h3>Nouveau professionnel</h3>
 <form action="{% url 'RLCreat' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Valider" />
 </form>
+
+</div>{% endblock %}
