@@ -146,6 +146,39 @@ def AdminTools(request):
     return render(request,'tablecom/AdminTools.html',locals())
 
 @permission_required('auth.change_permission')
-def AdminTools_PermissionCarnetRecreation(request):
+def AdminTools_PermissionCarnetRecreation(request): #will regenerate all permissions of different carnets
     PermCreationAllEntry(ChildSNotebook)
     return render(request,'tablecom/AdminTools.html',locals())
+
+@permission_required('auth.change_permission')
+def PermissionsManagement_Main(request):
+    ChildSNBs=list(ChildSNotebook.objects.all().order_by("-pk"))
+    return render(request, 'tablecom/PermissionsManagement_Main.html', locals())
+
+@permission_required('auth.change_permission')
+def PermissionsManagement_Detail(request,id_carnet):
+    print(id_carnet)
+    carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
+    usersPro=User.objects.filter(groups="2") #group 2 is "Professionnals"
+    listaccessPro=[]
+    for userPro in usersPro:
+        accesbool= userPro.has_perm("tablecom.CSNB{0}_access".format(id_carnet))
+
+        roleProNum=Profil.objects.get(user_id=userPro.pk).rolePro_id #get for each user the number of rolepro
+        nameRole = CategoriePro.objects.get(id=roleProNum).name
+        listaccessPro.append((userPro, accesbool, nameRole))
+    usersRL=User.objects.filter(groups="3") #group 3 is "Legal Responsibles"
+
+    return render(request, 'tablecom/PermissionsManagement_Detail.html', locals())
+
+@permission_required('auth.change_permission')
+def PermissionsManagement_Action (request, id_carnet, id_user, action):
+    print("appel d'une fonction visant à {0} l'acces de l'user {1} au carnet {2}".format(action,id_user,id_carnet))
+    carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
+    if action=="Allow":
+        PermAllower(id_carnet,id_user)
+    if action=="Remove":
+        PermRemover(id_carnet,id_user)
+
+    return redirect('PermissionsManagement_Detail', id_carnet=id_carnet)
+

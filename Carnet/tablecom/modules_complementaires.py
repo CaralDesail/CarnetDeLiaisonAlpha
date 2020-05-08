@@ -32,8 +32,9 @@ def list_of_articles(string_of_articles):
             print(articleSel.title)
             NewListArticles.append(articleSel)
         except:
-            print("Impossible de récupérer la liste des articles : Vérifier que chaque ID existe")
-            return None
+            print("Impossible de récupérer l'item {0} : Vérifier que chaque ID existe".format(article))
+
+
 
     return NewListArticles
 
