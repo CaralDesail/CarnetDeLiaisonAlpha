@@ -25,6 +25,17 @@ def home(request):
 
     return render(request,'tablecom/accueil_tablecom.html',locals())
 
+def ContactUs(request):
+    print("clic contact us")
+    form = ContactUsForm(request.POST or None)
+    #print(form.Categorie_Professionnelle)
+    if form.is_valid():
+        print("Formulaire validé")
+        envoi=True
+        form.save()
+        #print(form.data)
+    return render(request, 'tablecom/ContactUs.html',locals())
+
 def connexion(request):
     error = False
 
@@ -46,6 +57,7 @@ def connexion(request):
 def deconnexion(request):
     logout(request)
     return redirect('accueil')
+
 
 @permission_required('auth.add_user')
 @permission_required('tablecom.add_profil')

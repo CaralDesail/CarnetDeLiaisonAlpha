@@ -1,6 +1,10 @@
-<head><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></head>
+<!DOCTYPE html>
 
+{% extends "tablecom/base.html" %}
+{% block title %}Connexion{% endblock %}
+{% block nav %} {% endblock %}
+{% block content %}
+<div class="container">
 
 <h1>Se connecter</h1>
 
@@ -18,4 +22,8 @@ Vous êtes connecté, {{ user.username }} !
     {{ form.as_p }}
     <input type="submit" value="Se connecter" />
 </form>
+
+
 {% endif %}
+</div>
+{% endblock %}

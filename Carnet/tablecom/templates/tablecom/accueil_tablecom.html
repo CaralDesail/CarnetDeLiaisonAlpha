@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+    <style type="text/css">
+      [class*="col"] { margin-bottom: 40px; }
 
+    </style>
 {% extends "tablecom/base.html" %}
 {% block title %}Page d'accueil{% endblock %}
 
@@ -21,14 +24,14 @@
                 </p>
             </div>
             <div class="col">
-                 <p><a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-outline-danger btn-warning">Se déconnecter</button></a></p>
+
             </div>
         </div>
 </div>
 
         {% else %}
 
-             <div class="container">
+             <div class="container" margin-right="auto" margin-left="auto">
         <div class="row">
             <div class="col">
                 <p></p>
@@ -36,12 +39,12 @@
         </div>
         <div class="row">
             <div class="col">
-                <h4>Veuillez vous connecter. </h4>
+                <h4>Non authentifié : Veuillez vous connecter. </h4><a href="{% url 'connexion' %}"><button type="button" class="btn btn-primary">Se connecter</button></a>
                 </div>
         </div>
         <div class="row">
             <div class="col">
-                <h4>Si vous n'avez pas de compte, contactez nous. </h4>
+                <h4>Si vous n'avez pas de compte, <a href="{% url 'ContactUs' %}"><button type="button" class="btn btn-outline-dark">contactez nous</button></a> </h4>
                 </div>
         </div>
 </div>

@@ -4,6 +4,7 @@ from django.conf.urls import include, url
 from django.views.generic import *
 from .models import ChildSNotebook
 
+
 urlpatterns = [
     path('', views.home, name='accueil'),
     path('accueil', views.home, name='accueil'),
@@ -22,6 +23,7 @@ urlpatterns = [
     path('PermissionsManagement_Main', views.PermissionsManagement_Main, name="PermissionsManagement_Main"),
     path('PermissionsManagement_Detail/<id_carnet>', views.PermissionsManagement_Detail, name="PermissionsManagement_Detail"),
     path('PermissionsManagement_Action/<id_carnet>/<id_user>/<action>', views.PermissionsManagement_Action, name="PermissionsManagement_Action"),
+    path('ContactUs', views.ContactUs, name="ContactUs"),
 
     path('baseHTML', TemplateView.as_view(template_name="tablecom/base.html"))
 ]

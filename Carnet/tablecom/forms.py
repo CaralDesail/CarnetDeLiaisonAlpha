@@ -58,3 +58,7 @@ class ChildSNotebookCreatForm(forms.ModelForm):
         #fields = '__all__'
         fields = ('name','forename','date_of_birth','num_ident')
 
+class ContactUsForm(forms.ModelForm):
+    class Meta:
+        model=ContactUs
+        fields = '__all__'

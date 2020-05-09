@@ -33,5 +33,6 @@ admin.site.register(Article,ArticleAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Permission)
+admin.site.register(ContactUs)
 
 # Register your models here.

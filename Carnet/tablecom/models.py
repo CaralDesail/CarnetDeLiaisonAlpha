@@ -54,3 +54,24 @@ class Article(models.Model): #table of differents "notes", or "articles" that wi
 
     def __str__(self):
         return self.title
+
+class ContactUs(models.Model):
+    title=models.CharField(max_length=255, verbose_name="Titre",blank=True, default="")
+    content = models.TextField(verbose_name="Votre message*")
+    email= models.EmailField(verbose_name="email*")
+    # fields if ask for user access creation
+    username = models.CharField(max_length=255, verbose_name="Nom d'utilisateur",blank=True)
+    first_name = models.CharField(max_length=255, verbose_name="Prénom",blank=True)
+    last_name= models.CharField(max_length=255, verbose_name="Nom",blank=True)
+    num_ident = models.CharField(max_length=255, verbose_name="Numéro d'identité",blank=True)
+    phone = models.CharField(max_length=60, blank=True,verbose_name="Téléphone",default="")
+    TYPE_SELECT = (
+        ('0', 'Je ne sais pas'),
+        ('1', 'Responsable_Legal'),
+        ('2', 'Professionnel')
+    )
+    RLorPro = models.CharField(max_length=11,choices=TYPE_SELECT, default='0',verbose_name="Quel est votre statut ? (Professionnel = Enseignant, Professionnel de santé, Responsable légal = Parent, tuteur)")
+    statusRL=models.CharField(blank=True, max_length=25, verbose_name="Statut si résponsable légal (Mère, Père, Tuteur, ...)", default=" ")
+    rolePro = models.ForeignKey('CategoriePro', on_delete=models.CASCADE, default=0,
+                                verbose_name='Catégorie si professionnel',blank=True)
+    child_access_asked = models.CharField(max_length=255, verbose_name="Nom des enfants rattachés",blank=True, default=" ")
