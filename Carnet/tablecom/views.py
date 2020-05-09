@@ -37,6 +37,35 @@ def ContactUs(request):
         #print(form.data)
     return render(request, 'tablecom/ContactUs.html',locals())
 
+def MyProfile(request):
+    groupQS = request.user.groups.all()
+    userGroupName = groupQS[0].name
+    userProfil = Profil.objects.get(user_id=request.user.pk)
+
+    roleProNum = Profil.objects.get(user_id=request.user.pk).rolePro_id
+    nameRole = CategoriePro.objects.get(id=roleProNum).name
+
+    print(userProfil)
+    return render(request, 'tablecom/MyProfile.html',locals())
+
+def EditUserForm(request):
+    groupQS = request.user.groups.all()
+    userGroupID = groupQS[0].id
+    print(userGroupID)
+    """
+    if userGroupID == 2: #Professionnel
+        print("A modifier")
+        form = UserCreationForm(instance=request.user) 
+    if userGroupID == 3: # RL
+        print("A modifier")
+        form = RLCreatForm(request.POST or None) 
+
+    if form.is_valid():
+        print("Formulaire validé")
+        envoi=True
+        form.save()"""
+
+    return render(request, 'tablecom/EditUser.html', locals())
 
 def deconnexion(request):
     logout(request)

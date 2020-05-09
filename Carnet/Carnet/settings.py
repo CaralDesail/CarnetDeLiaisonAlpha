@@ -20,11 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 #To use SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'datacar38@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = '' #put here the email adress
+EMAIL_HOST_PASSWORD = '' # and here the password
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '4*2qmd9$$6@cd)l@&vxhfs^^y8sf6h&d1rferdid7w5$n)6y7_'

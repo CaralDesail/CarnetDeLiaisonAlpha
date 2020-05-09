@@ -6,8 +6,10 @@
 {% block content %}
 
 <div class="container">
-{% if envoi %}Le responsable légal à bien été créé ! <br><br><br>{% endif %}
-    <meta http-equiv="REFRESH" content="1;url=accueil">
+{% if envoi %}Le responsable légal à bien été créé ! <br><br><br>
+     <meta http-equiv="REFRESH" content="1;url=accueil">
+    {% endif %}
+
 <h3>Nouveau responsable légal</h3>
 <form action="{% url 'RLCreat' %}" method="post">
     {% csrf_token %}
