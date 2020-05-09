@@ -19,6 +19,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
+#To use SMTP
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'datacar38@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '4*2qmd9$$6@cd)l@&vxhfs^^y8sf6h&d1rferdid7w5$n)6y7_'
 
@@ -120,3 +127,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = '/tablecom/accueil'

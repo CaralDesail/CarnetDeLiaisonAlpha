@@ -16,8 +16,8 @@ def list_of_prof(listStringId):
             print(ProfSel.first_name,' ', ProfSel.last_name, ' ',ProfSel.email)
             NewListProfs.append(ProfSel)
         except:
-            print("Impossible de récupérer la liste des professionnels: Vérifier que chaque ID existe")
-            return None
+            print("Impossible de récupérer certains professionnels: Vérifier que chaque ID existe")
+
     return NewListProfs
 
 def list_of_articles(string_of_articles):

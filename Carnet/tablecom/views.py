@@ -10,6 +10,7 @@ from .modules_complementaires import *
 from .admin_compl_tools import *
 from .permissions import *
 
+
 def home(request):
     date=datetime.now()
     #CurrentUserP=request.user  // not used because "user" can be called directly in template : no need to call it
@@ -36,27 +37,11 @@ def ContactUs(request):
         #print(form.data)
     return render(request, 'tablecom/ContactUs.html',locals())
 
-def connexion(request):
-    error = False
-
-    if request.method == "POST":
-        form = ConnexionForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(username=username, password=password)  # Nous vérifions si les données sont correctes
-            if user:  # Si l'objet renvoyé n'est pas None
-                login(request, user)  # nous connectons l'utilisateur
-            else: # sinon une erreur sera affichée
-                error = True
-    else:
-        form = ConnexionForm()
-
-    return render(request, 'tablecom/ConnectUser.html', locals())
 
 def deconnexion(request):
     logout(request)
     return redirect('accueil')
+
 
 
 @permission_required('auth.add_user')
@@ -124,6 +109,7 @@ def ChildSNotebookVisu(request,id_carnet):
 
         listArticlesString= carnet.articles_id #catch list of articles ID
         newListOfArticles=list_of_articles(listArticlesString)
+        print(newListOfProf)
 
 
 
