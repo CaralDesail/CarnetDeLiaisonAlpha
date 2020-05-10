@@ -48,22 +48,34 @@ def MyProfile(request):
     print(userProfil)
     return render(request, 'tablecom/MyProfile.html',locals())
 
-def EditUserForm(request):
-    groupQS = request.user.groups.all()
-    userGroupID = groupQS[0].id
-    print(userGroupID)
-    """
-    if userGroupID == 2: #Professionnel
-        print("A modifier")
-        form = UserCreationForm(instance=request.user) 
-    if userGroupID == 3: # RL
-        print("A modifier")
-        form = RLCreatForm(request.POST or None) 
+def EditUserForm(request,editzone):
+    myProfilInstance = Profil.objects.get(user_id=request.user.pk)
 
-    if form.is_valid():
-        print("Formulaire validé")
-        envoi=True
-        form.save()"""
+    if request.method == 'POST': # if form has been validated
+        if editzone == "email" :
+            print("edit du mail")
+            form = EditUserMail(request.POST,instance=request.user)
+
+        if editzone == "phone" :
+            form = EditUserPhone(request.POST,instance=myProfilInstance)
+
+        if form.is_valid():
+            print("Formulaire validé")
+            envoi=True
+            form.save()
+            return redirect("MyProfile")
+        else :
+            print("form non valide ")
+
+    else : # if not still validated
+        if editzone == "email" :
+            print("edit du mail")
+            form = EditUserMail(instance=request.user)
+
+        if editzone == "phone" :
+            form = EditUserPhone(instance=myProfilInstance)
+
+
 
     return render(request, 'tablecom/EditUser.html', locals())
 

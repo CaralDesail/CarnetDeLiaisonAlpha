@@ -9,10 +9,10 @@
 
 {% if envoi %}
 Le profil à bien été modifié !
-<meta http-equiv="REFRESH" content="1;url=accueil">
+
 {% else %}
     <h3>Modification du profil</h3>
-<form action="{% url 'ProCreat' %}" method="post">
+<form action="{% url 'EditUserForm' editzone %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Valider" />

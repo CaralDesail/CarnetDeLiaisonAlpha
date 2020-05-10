@@ -26,7 +26,8 @@ urlpatterns = [
     path('ProCreat', views.ProCreatView, name='ProCreat'),
     path('RLCreat', views.RLCreatView, name="RLCreat"),
     path('MyProfile',views.MyProfile, name="MyProfile"),
-    path('EditUserForm',views.EditUserForm, name="EditUserForm"),
+    path('EditUserForm/<editzone>',views.EditUserForm, name="EditUserForm"),
+
 
     path('AdminTools',views.AdminTools, name="AdminTools"),
     path('AdminTools_PermissionCarnetRecreation',views.AdminTools_PermissionCarnetRecreation,name="AdminTools_PermissionCarnetRecreation"),

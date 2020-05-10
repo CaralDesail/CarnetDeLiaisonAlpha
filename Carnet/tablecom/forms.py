@@ -23,6 +23,21 @@ class ProCreatForm(UserCreationForm):
      user_profile.save()
      return user, user_profile
 
+class EditUserMail(forms.ModelForm):
+    class Meta :
+        model = User
+        #fields = '__all__'
+        fields = ('email',)
+
+
+
+class EditUserPhone(forms.ModelForm):
+    class Meta :
+        model = Profil
+        #fields = '__all__'
+        fields = ('phone',)
+
+
 class RLCreatForm(UserCreationForm):
     Statut_Responsable_Legal = forms.CharField(max_length=30, required=True)
     Identifiant_Personnel_Unique = forms.CharField(max_length=30, required=True)
