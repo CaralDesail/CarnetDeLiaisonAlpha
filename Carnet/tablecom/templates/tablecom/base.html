@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css">
+        <style type="text/css">
+      [class*="marge3"] { margin-left: 3em; }
 
+    </style>
 
    <title>{% block title %}Titre de la page{% endblock %}</title>
 </head>
@@ -31,13 +34,12 @@
           </button>
           <div class="dropdown-menu">
 
-            <a href="{% url 'MyProfile' %}"><button type="button" class="btn btn btn-secondary btn-sm">Acceder au profil</button></a>
-            <a href="{% url 'password_change' %}"><button type="button" class="btn btn btn-secondary btn-sm">Changer mot de passe</button></a><br><br>
+            <a href="{% url 'MyProfile' %}"><button type="button" class="btn btn btn-secondary btn-sm btn-block">Acceder au profil</button></a>
+            <a href="{% url 'password_change' %}"><button type="button" class="btn btn btn-secondary btn-sm btn-block">Changer mot de passe</button></a><br><br>
             <div class="dropdown-divider"> </div>
-            <a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger">Se déconnecter</button></a>
+            <a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger btn-block">Se déconnecter</button></a>
           </div>
         </div>
-
     </div>
   </div>
 </div>

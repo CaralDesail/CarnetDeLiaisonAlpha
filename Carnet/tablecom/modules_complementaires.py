@@ -30,6 +30,9 @@ def list_of_articles(string_of_articles):
         try :
             articleSel=Article.objects.get(id=article)
             print(articleSel.title)
+            #print("les numero de l'auteur :",articleSel.id_Professionnal, "ce qui correspond à :",User.objects.get(pk=articleSel.id_Professionnal).first_name,User.objects.get(pk=articleSel.id_Professionnal).last_name)
+            articleSel.auteur_first_name=User.objects.get(pk=articleSel.id_Professionnal).first_name
+            articleSel.auteur_last_name=User.objects.get(pk=articleSel.id_Professionnal).last_name
             NewListArticles.append(articleSel)
         except:
             print("Impossible de récupérer l'item {0} : Vérifier que chaque ID existe".format(article))

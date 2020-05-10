@@ -26,10 +26,9 @@
       <tbody>
         {% for prof in newListOfProf %}
         <tr>
-          <th scope="row">{{prof.id}} </th>
+            <th scope="row">{{prof.id}} <div class="marge3"></div> </th>
           <td><h4> {{prof.first_name}} {{prof.last_name}}</h4></td>
           <td>{{prof.email}}</td>
-
 
 
                 {% empty %}
@@ -41,7 +40,8 @@
     </table>
 <br><br>
 
-<p><a href="{% url 'NewArticle' carnet.id %}"><button type="button" class="btn btn-primary">Ecrire nouvelle transmission</button></a></p>
+<p><a href="{% url 'NewArticle' carnet.id %}"><button type="button" class="btn btn-primary">Ecrire nouvelle transmission
+</button></a></p>
 
 
 
@@ -52,8 +52,9 @@
 
 
     {% for article in newListOfArticles %}
-    <a href="" class="list-group-item list-group-item-action">    <h4> {{article.title}} </h4> {{article.date}}
-        <p>{{article.content}}</p> </a>
+    <a href="" class="list-group-item list-group-item-action">    <h4> {{article.title}} </h4> <small>
+        {{article.date}} par {{ article.auteur_first_name}} {{ article.auteur_last_name}}</small>
+        <div class="marge3"> <br>{{article.content}}</div> </a>
 
     {% empty %}
         <p>Aucun article trouvé.</p>
