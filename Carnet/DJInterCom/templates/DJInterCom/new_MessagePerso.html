@@ -1,19 +1,43 @@
 
 {% extends "tablecom/base.html" %}
+{% block headsupplementaire %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+{% endblock %}
 {% block title %}Nouveau message{% endblock %}
 
 {% block content %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.js-basic-multiple').select2();
+});
+</script>
+
+
 <div class="container">
 {% if envoi %}
 Le message à bien été envoyé !
 <meta http-equiv="REFRESH" content="1;url=accueil">
 {% else %}
     <h3>Nouveau message</h3>
+
+    <b>Selection des correspondants :</b>
+<select class="js-basic-multiple" name="contacts[]" multiple="multiple" style="width: 50%">
+  <option value="12">Kiné</option>
+  <option value="24">Enseignant qui va bien</option>
+    <option value="5">Orthophoniste</option>
+    <option value="22">APA</option>
+
+</select>
+
+
+<div class="container" style="margin: 20px 20px 20px 150px;">
 <form action="{% url 'new_MessagePerso' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Valider" />
 </form>
+    </div>
 {% endif %}
 
 </div>{% endblock %}
