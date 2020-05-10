@@ -1,0 +1,22 @@
+
+{% extends "tablecom/base.html" %}
+{% block title %}Messagerie{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>Bienvenue {{ user.username }}</h3>
+<br>
+<h3>Messagerie : </h3>
+    {% for message in listeMessages %}
+     <h4> {{message.titre}} <small> {{message.date}} par {{ message.auteur_first_name }} {{ message.auteur_last_name }}</small></h4>
+        <div class="marge3"> <br>{{message.contenu}}</div><br><br>
+
+    {% empty %}
+        <p>Aucun article trouvé.</p>
+{% endfor %}
+
+<br><a href="new_MessagePerso">Nouveau message</a>
+
+<br><a href="CorrespondanceTableCheck">Verification de correspondance de table</a>
+</div>
+{% endblock %}
