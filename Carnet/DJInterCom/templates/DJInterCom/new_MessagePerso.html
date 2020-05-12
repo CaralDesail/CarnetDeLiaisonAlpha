@@ -23,10 +23,9 @@ Le message à bien été envoyé !
 
     <b>Selection des correspondants :</b>
 <select class="js-basic-multiple" name="contacts[]" multiple="multiple" style="width: 50%">
-  <option value="12">Kiné</option>
-  <option value="24">Enseignant qui va bien</option>
-    <option value="5">Orthophoniste</option>
-    <option value="22">APA</option>
+    {% for userIndiv in listProRLToPrint %}
+    <option value={{ userIndiv.id }}>{{ userIndiv.first_name }} {{ userIndiv.last_name }} {{ userIndiv.function }}</option>
+{% endfor %}}
 
 </select>
 

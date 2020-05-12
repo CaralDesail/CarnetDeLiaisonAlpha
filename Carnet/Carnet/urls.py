@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tablecom/', include('tablecom.urls')),
-    path('messages/',include('DJInterCom.urls'))
+    path('messages/',include('DJInterCom.urls')),
+
 ]

@@ -17,6 +17,11 @@
 
 <br><a href="new_MessagePerso">Nouveau message</a>
 
+{% if userGroupName == 'SuperUser' %}
+
+
+<br><br><h2>Outils admin :</h2>
 <br><a href="CorrespondanceTableCheck">Verification de correspondance de table</a>
+    {% endif %}
 </div>
 {% endblock %}

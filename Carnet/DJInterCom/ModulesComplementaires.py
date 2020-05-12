@@ -64,3 +64,42 @@ def lastEntryToAddinCorrespondanceTable(request): #add id of message in correspo
 
     else:
         print("non identique : ",myPk, " vs ",MessagePerso.objects.order_by('-id')[0].auteurID)
+
+def listProRLPerso(idCarnet):
+    print("l'ID du carnet :" ,idCarnet)
+
+    listToreturn=[]
+
+    if (idCarnet==0): #if idCarnet is 0, then add all Users
+        print("Inclusion de tous les utilisateurs")
+        listModelUser=User.objects.all()
+    else :
+        listModelUser = User.objects.all()
+        #################################################
+        # TO CREATE : use a selection of autorized users and return it as listModelUser#
+        #################################################
+
+
+    for userId in listModelUser: #will add function of user to userId ... before returning the true list
+        print(userId.first_name, " ", userId.last_name, )
+        print("son id est :",userId.id)
+        try:
+            profilId=Profil.objects.get(user_id=userId.id)
+        except:
+            print("Incohérence sur la récupération du profil de user ", userId.id)
+        try:
+            groupsUser=userId.groups.all()
+            userGroupName = groupsUser[0].name
+            if (userGroupName=="SuperUser"):
+                userId.function="SuperUtilisateur"
+            if (userGroupName=="Professionnel"):
+                userId.function=CategoriePro.objects.get(id=profilId.rolePro_id).name
+            if (userGroupName=="Responsable légal"):
+                userId.function=profilId.statusRL
+            print(userId.function)
+        except:
+            print("Probleme d'algorythme d'utilisation de case selon groupage")
+
+        listToreturn.append(userId)
+
+    return listToreturn
