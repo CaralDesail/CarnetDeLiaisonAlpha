@@ -21,6 +21,7 @@ Le message à bien été envoyé !
 {% else %}
     <h3>Nouveau message</h3>
 
+
     <b>Selection des correspondants :</b>
 <select class="js-basic-multiple" name="contacts[]" multiple="multiple" style="width: 50%">
     {% for userIndiv in listProRLToPrint %}
@@ -39,4 +40,6 @@ Le message à bien été envoyé !
     </div>
 {% endif %}
 
-</div>{% endblock %}
+</div>
+
+{% endblock %}

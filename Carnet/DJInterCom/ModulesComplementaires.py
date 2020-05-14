@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import permission_required
 
 def List_Messages_By_Access(request):
     myPk=request.user.id
-    listeMessages = MessagePerso.objects.all()
+    #listeMessages = MessagePerso.objects.all()
     IDListAllow=CorrespondanceTableMessagesByUser.objects.get(idUser=myPk).messagesAccess
     print(IDListAllow)
     listOfDiffID=IDListAllow.split(";")
@@ -24,10 +24,29 @@ def List_Messages_By_Access(request):
             autorID=CorrespondingMessage.auteurID
             CorrespondingMessage.auteur_first_name=User.objects.get(pk=autorID).first_name
             CorrespondingMessage.auteur_last_name=User.objects.get(pk=autorID).last_name
+            CorrespondingMessage.Correspondantsstring=\
+                callOfCorrespondantList(request,CorrespondingMessage,messageID) # call above function
+
+
             list_to_return.append(CorrespondingMessage)
         except :
-            print("Message {} non trouvé".format(messageID))
+            print("Message {} non valide".format(messageID))
     return list_to_return
+
+def callOfCorrespondantList (request,CorrespondingMessage,messageID): # return a string with the name of correspondants
+    try:
+        listCorrespondants=[]
+        for correspondant in (CorrespondingMessage.accessUserID).split(";") :
+            Correspondant=str(User.objects.get(pk=correspondant).first_name)+" "+str(User.objects.get(pk=correspondant).last_name)
+            listCorrespondants.append(Correspondant)
+
+        listCorrespondants=" , ".join(listCorrespondants)
+        print(listCorrespondants)
+        return listCorrespondants
+
+    except:
+        print("Echec de la récupération des correspondants ",messageID)
+
 
 def correspondanceTableMessages_check(request): # will check if corresponding item in correspondance table exist, if not create
     liste_new=[]
@@ -46,6 +65,7 @@ def correspondanceTableMessages_check(request): # will check if corresponding it
     return HttpResponse("Table verifiee, nouvelle ligne pour users :",liste_new)
 
 def lastEntryToAddinCorrespondanceTable(request): #add id of message in correspondanceTable
+    #first part that add writer id to access list
     myPk = request.user.id
     if (int(myPk) == int(MessagePerso.objects.order_by('-id')[0].auteurID)):  # will check identity of writer to avoid
         print("identique : ", myPk)                                      # double message at the same time fail
@@ -61,9 +81,29 @@ def lastEntryToAddinCorrespondanceTable(request): #add id of message in correspo
             correspondanceItem=CorrespondanceTableMessagesByUser.objects.get(idUser=myPk)
             correspondanceItem.messagesAccess  +=(";"+str(idOfNewMessage))
             correspondanceItem.save()
+            add_sentToCorrespondanttoAccessList() # call the next function that will add
+            # correspondants to access list in CorrespondanceTalbeMessagesByUser
 
     else:
         print("non identique : ",myPk, " vs ",MessagePerso.objects.order_by('-id')[0].auteurID)
+
+def add_sentToCorrespondanttoAccessList():
+    print("Appel de la seconde fonction qui va inscrire les correpondants à la liste autorisée à la lecture du message")
+    LastMessage=MessagePerso.objects.order_by('-id')[0]
+    IDCorrString=LastMessage.accessUserID
+    IDCorrList=IDCorrString.split(";") # gives list of users purposed in message field "accessUserID"
+    for idTOCheck in IDCorrList:
+        UserItemInCorrespondanceLine = CorrespondanceTableMessagesByUser.objects.get(idUser=idTOCheck)
+        StringOfUsersinTable=UserItemInCorrespondanceLine.messagesAccess
+        ListOfUsersIntable=StringOfUsersinTable.split(";") # gives the list of access to messages in correspondance table
+        if (LastMessage.id in ListOfUsersIntable):
+            print(LastMessage.id, " est déjà dans la liste ")
+        else :
+            UserItemInCorrespondanceLine.messagesAccess += (";"+str(LastMessage.id))
+            print("ID ajouté : ", LastMessage.id , " a l'user ", idTOCheck)
+            UserItemInCorrespondanceLine.save()
+
+
 
 def listProRLPerso(idCarnet):
     print("l'ID du carnet :" ,idCarnet)
@@ -96,10 +136,15 @@ def listProRLPerso(idCarnet):
                 userId.function=CategoriePro.objects.get(id=profilId.rolePro_id).name
             if (userGroupName=="Responsable légal"):
                 userId.function=profilId.statusRL
-            print(userId.function)
+            #print(userId.function)
         except:
             print("Probleme d'algorythme d'utilisation de case selon groupage")
 
-        listToreturn.append(userId)
+        keyT=userId.id
+        valueK=userId.first_name+" "+userId.last_name+" "+userId.function
+        keyAndValue=(keyT,valueK)
+
+        listToreturn.append(keyAndValue)
+
 
     return listToreturn

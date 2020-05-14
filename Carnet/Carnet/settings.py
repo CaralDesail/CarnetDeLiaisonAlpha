@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tablecom',
     'DJInterCom',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

@@ -4,6 +4,7 @@ from .models import *
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 
+
 class ProCreatForm(UserCreationForm):
     Categorie_Professionnelle = forms.ModelChoiceField(queryset=CategoriePro.objects.all())
     Identifiant_Professionnel = forms.CharField(max_length=30, required=True)

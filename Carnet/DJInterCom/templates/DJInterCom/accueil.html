@@ -4,18 +4,18 @@
 
 {% block content %}
 <div class="container">
-    <h3>Bienvenue {{ user.username }}</h3>
 <br>
 <h3>Messagerie : </h3>
     {% for message in listeMessages %}
-     <h4> {{message.titre}} <small> {{message.date}} par {{ message.auteur_first_name }} {{ message.auteur_last_name }}</small></h4>
+    <h4> {{message.titre}} <small> {{message.date}} par {{ message.auteur_first_name }} {{ message.auteur_last_name }}</small></h4>
+    <small>Pour : {{message.Correspondantsstring}}</small>
         <div class="marge3"> <br>{{message.contenu}}</div><br><br>
 
     {% empty %}
         <p>Aucun article trouvé.</p>
 {% endfor %}
 
-<br><a href="new_MessagePerso">Nouveau message</a>
+<br><a href="Message_sw">Nouveau message</a>
 
 {% if userGroupName == 'SuperUser' %}
 

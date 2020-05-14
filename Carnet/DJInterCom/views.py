@@ -2,18 +2,50 @@ from django.shortcuts import render
 from .models import *
 from .forms import *
 from .ModulesComplementaires import *
+from django.views.generic import FormView
+from django.utils import timezone
+from django.contrib.messages.views import SuccessMessageMixin
+
+
+
+class TemplateNewMessageFormView(SuccessMessageMixin,FormView):
+    template_name = 'DJInterCom/form.html'
+    success_url = 'accueilMessager'
+    success_message = "Message envoyé"
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        #print("ok valide, valeurs : ",form.cleaned_data["titre"])
+        correspondantsIDtemp=form.cleaned_data["correspondants"]
+        correspondantsID=";".join(correspondantsIDtemp)
+        titre=form.cleaned_data["titre"]
+        contenu=form.cleaned_data["contenu"]
+        timeNdate=timezone.now()
+        userid=self.request.user.id
+
+        newEntryMessage=MessagePerso(auteurID=userid,titre=titre,contenu=contenu,accessUserID=correspondantsID,date=timeNdate)
+        newEntryMessage.save()
+
+        lastEntryToAddinCorrespondanceTable(self.request)
+
+        return super().form_valid(form)
+
 
 def home(request):
     print("Appel home")
 
     listeMessages=List_Messages_By_Access(request)
+
+
+
     try:
         groupQS = request.user.groups.all()
         userGroupName = groupQS[0].name
         print("User group = ", userGroupName)
 
     except :
-        print("userAnonymous")
+        print("userAnonymous ou sans groupe")
         userGroupName = ""
 
     return render(request,'DJInterCom/accueil.html',locals())

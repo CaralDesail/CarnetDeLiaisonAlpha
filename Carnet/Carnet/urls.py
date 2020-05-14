@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tablecom/', include('tablecom.urls')),
     path('messages/',include('DJInterCom.urls')),
+    path('select2/', include('django_select2.urls')),
 
 ]

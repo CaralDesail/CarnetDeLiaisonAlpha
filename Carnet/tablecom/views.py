@@ -42,7 +42,7 @@ def MyProfile(request):
     userGroupName = groupQS[0].name
     userProfil = Profil.objects.get(user_id=request.user.pk)
 
-    roleProNum = Profil.objects.get(user_id=request.user.pk).rolePro_id
+    roleProNum = userProfil.rolePro_id
     nameRole = CategoriePro.objects.get(id=roleProNum).name
 
     print(userProfil)
