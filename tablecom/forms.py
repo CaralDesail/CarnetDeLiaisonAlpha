@@ -66,7 +66,7 @@ class NewArticleForm(forms.ModelForm):
     class Meta :
         model = Article
         #fields = '__all__'
-        fields = ('title', 'content','list_to_notify',)
+        fields = ('title', 'content',)
 
 class ChildSNotebookCreatForm(forms.ModelForm):
     class Meta:
