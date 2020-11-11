@@ -133,3 +133,6 @@ STATIC_URL = 'http://aref.ovh/static/HandeBook/'
 
 
 LOGIN_REDIRECT_URL = '/tablecom/accueil'
+
+# adress allowed to communicate :
+ALLOWED_HOSTS = ['handebook.herokuapp.com']
