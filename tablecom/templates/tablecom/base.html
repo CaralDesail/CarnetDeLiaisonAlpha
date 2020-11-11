@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+    {% load static %}
+    {% block head %}
+        <html lang="fr">
+        <head>
+
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://aref.ovh/static/HandeBook/bootstrapExportTheme/bootstrap.min.css" >
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+
+        {{ form.media.css }}{{ form.media.js }}
+
+            {% block headsupplementaire %}{% endblock %}
+                <style type="text/css">
+              [class*="marge3"] { margin-left: 3em; }
+
+            </style>
+
+           <title>{% block title %}Titre de la page{% endblock %}</title>
+        </head>
+
+    {% endblock %}
+<body>
+
+    <nav>
+       {% block nav %}
+
+            {% if user.is_authenticated %}
+
+<div class="container" style="background:#ffbaba !important;">
+  <!--
+  <div class="row" style="background:#ffbaba !important;">
+    <div class="col-sm-1" style="background-color:#ffbaba;"><img src="http://aref.ovh/wp-content/uploads/2020/10/119987486_123852099454650_8805865808918569833_o-300x300.png" class="img-fluid"></div>
+    <div class="col-sm-2" style="background-color:#ffbaba;"></div>
+    <div class="col-sm-4" style="background-color:#ffbaba;"><a href="{% url 'accueilMessager' %}"><button type="button" class="btn btn-secondary">Messagerie</button></a></div>
+    <div class="col-sm-5" style="background-color:#ffbaba;">
+        <div class="btn-group">
+           <a href="{% url 'accueil' %}"><button type="button" class="btn btn-primary">Accueil</button></a>&nbsp
+          <button type="button" class="btn btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+          </button>
+          <div class="dropdown-menu">
+
+            <a href="{% url 'MyProfile' %}"><button type="button" class="btn btn btn-secondary btn-sm btn-block">Acceder au profil</button></a>
+            <a href="{% url 'password_change' %}"><button type="button" class="btn btn btn-secondary btn-sm btn-block">Changer mot de passe</button></a><br><br>
+            <div class="dropdown-divider"> </div>
+            <a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger btn-block">Se déconnecter</button></a>
+          </div>
+        </div>
+    </div>
+  </div>
+  -->
+
+    <div class="d-flex flex-wrap align-items-center"> <!-- Boite du bandeau du haut qui va mettre le premier élément à gauche, et les autres à distance à droite -->
+          <div class="mr-auto p-2 ">
+            <div class="d-flex justify-content-start">
+                <div class="p-2"><a href="{% url 'accueil' %}"><img src="{% static 'images/home.svg' %}" class="img-fluid"></a></div>
+                <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary"><p>{{ user.email }}</p></h6></div>
+            </div>
+          </div>
+
+
+          <div class="p-2 ">
+            <div class="d-flex">
+              <div class="p-2"><img src="{% static 'images/notif_mess_perso.svg' %}" class="img-fluid"></div>
+              <div class="p-2"><img src="{% static 'images/notif_fil_general.svg' %}" class="img-fluid"></div>
+            </div>
+          </div>
+
+
+          <div class="p-2 ">
+
+              <!-- <div class="d-flex flex-column">
+                  <div class="p-2">Bouton préférences</div>
+                  <div class="p-2">Bouton se déconnecter</div>
+              </div>
+              -->
+            <div class="d-flex flex-column">
+              <div class="p-2"><a href="{% url 'MyProfile' %}"><button type="button" class="btn btn-info btn-lg">Mes préférences</button></a></div>
+              <div class="p-2"><a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger btn-block btn-lg">Se déconnecter</button></a></div>
+            </div>
+          </div>
+    </div>
+</div>
+            {% else %}
+        <div class="container">
+.
+        </div>
+            {% endif %}
+
+       {% endblock %}
+   </nav>
+
+    {% block content %}Contenu à introduire{% endblock %}
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+        <script>
+        window.cookieconsent.initialise({
+          "palette": {
+            "popup": {
+              "background": "#eaf7f7",
+              "text": "#5c7291"
+            },
+            "button": {
+              "background": "#56cbdb",
+              "text": "#ffffff"
+            }
+          },
+          "content": {
+            "message": "Hand eBook utilise des cookies pour vous proposer la meilleure expérience utilisateur possible. ",
+            "dismiss": "D'accord ! ",
+            "link": "En savoir plus."
+          }
+        });
+        </script>
+
+</body>
+</html>

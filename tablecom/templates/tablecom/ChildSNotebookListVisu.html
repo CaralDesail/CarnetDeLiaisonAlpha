@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
+ <div class="container">
+{{ date }}
+<h1>Mes carnets</h1><br>
+<div class="list-group">
+
+
+
+{% for carnet in liste_carnets %}
+<a href="{% url 'ChildSNotebookVisu' carnet.id %}" class="list-group-item list-group-item-action list-group-item-secondary">
+    	<h3>{{ carnet.name }} {{ carnet.forename }}</h3>
+    	<p> Date de naissance : {{carnet.date_of_birth}} || Numéro SS : {{carnet.num_ident}} </p>
+        <br>
+</a>
+{% empty %}
+    <p>Aucun carnet.</p>
+        {% endfor %}</div></div>
+
+{% endblock %}

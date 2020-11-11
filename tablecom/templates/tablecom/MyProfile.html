@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+<div class="container" style="background: white;padding: 40px 40px 20px 20px;" >
+    <h2><small>Username : </small>{{ user.username }} </h2>  Groupe : <big>{{ userGroupName }}</big>
+
+    <div class="container" style="background: white;margin: 20px 20px 20px 150px;" >
+
+        <h3><small>Nom : </small>{{ user.last_name }}</h3>
+        <h3><small>Prénom : </small>{{ user.first_name }}</h3>
+        <h3><small>email : </small>{{ user.email }} <a href="{% url 'EditUserForm' 'email' %}" class="btn btn-outline-secondary btn-sm ">Editer</a> </h3>
+
+        <h3><small>Téléphone : </small>{{ userProfil.phone }} <a href="{% url 'EditUserForm' 'phone' %}" class="btn btn-outline-secondary btn-sm ">Editer</a> </h3>
+        <h3><small>Numéro d'identité : </small>{{ userProfil.num_ident }}</h3>
+
+        {% if userGroupName == "SuperUser" %}
+            Vous êtes un super utilisateur.
+        {% endif %}
+
+        {% if userGroupName == "Professionnel" %}
+        <h3><small>Fonction : </small>{{ nameRole }}</h3>
+        {% endif %}
+        {% if userGroupName == "Responsable légal" %}
+        <h3><small>Rôle : </small>{{ userProfil.statusRL }}</h3>
+        {% endif %}
+
+
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}

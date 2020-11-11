@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<h1>{{ carnet.name }} {{ carnet.forename }} <span class="small"> né(e) le {{carnet.date_of_birth}}</span></h1>
+
+<p class="infos">{{carnet.num_ident}}</p>
+
+<br>
+
+    <table class="table-sm">
+
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Liste des professionnels</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for prof in newListOfProf %}
+        <tr>
+            <th scope="row">{{prof.id}} <div class="marge3"></div> </th>
+          <td><h4> {{prof.first_name}} {{prof.last_name}}</h4></td>
+          <td>{{prof.email}}</td>
+
+
+                {% empty %}
+            <p>Aucun professionnel trouvé.</p>
+            {% endfor %}
+        </tr>
+      </tbody>
+
+    </table>
+<br><br>
+
+<p><a href="{% url 'NewArticle' carnet.id %}"><button type="button" class="btn btn-primary">Ecrire nouvelle transmission
+</button></a></p>
+
+
+
+<br><br>
+
+    <h3>Dernières transmissions </h3>
+<div class="list-group">
+
+    {% for article in newListOfArticles %}
+    <a href="" class="list-group-item list-group-item-action">    <h4> {{article.title}} </h4> <small>
+        {{article.date}} par {{ article.auteur_first_name}} {{ article.auteur_last_name}}</small>
+        <div class="marge3"> <br>{{article.content}}</div> </a>
+
+    {% empty %}
+        <p>Aucun article trouvé.</p>
+{% endfor %}
+</div></div>
+{% endblock %}

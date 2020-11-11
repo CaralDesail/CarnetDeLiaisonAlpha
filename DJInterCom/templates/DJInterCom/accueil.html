@@ -1,0 +1,27 @@
+
+{% extends "tablecom/base.html" %}
+{% block title %}Messagerie{% endblock %}
+
+{% block content %}
+<div class="container">
+<br>
+<h3>Messagerie : </h3>
+    {% for message in listeMessages %}
+    <h4> {{message.titre}} <small> {{message.date}} par {{ message.auteur_first_name }} {{ message.auteur_last_name }}</small></h4>
+    <small>Pour : {{message.Correspondantsstring}}</small>
+        <div class="marge3"> <br>{{message.contenu}}</div><br><br>
+
+    {% empty %}
+        <p>Aucun article trouvé.</p>
+{% endfor %}
+
+<br><a href="Message_sw">Nouveau message</a>
+
+{% if userGroupName == 'SuperUser' %}
+
+
+<br><br><h2>Outils admin :</h2>
+<br><a href="CorrespondanceTableCheck">Verification de correspondance de table</a>
+    {% endif %}
+</div>
+{% endblock %}
