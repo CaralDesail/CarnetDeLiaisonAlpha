@@ -34,8 +34,8 @@ SECRET_KEY = '4*2qmd9$$6@cd)l@&vxhfs^^y8sf6h&d1rferdid7w5$n)6y7_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# adress allowed to communicate :
+ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
 
 # Application definition
 
@@ -86,10 +86,21 @@ WSGI_APPLICATION = 'Carnet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Carnet',
+        'USER': 'name',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -129,8 +140,7 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/tablecom/accueil'
 
-# adress allowed to communicate :
-ALLOWED_HOSTS = ['handebook.herokuapp.com']
+
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
