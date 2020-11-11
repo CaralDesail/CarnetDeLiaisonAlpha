@@ -12,7 +12,7 @@ django-postman==3.6.2.post1
 django-select2==7.2.3
 filelock==3.0.12
 future==0.18.2
-gunicorn==20.0.4
+gunicorn==20.0.4 
 idna==2.8
 imageio==2.6.1
 imageio-ffmpeg==0.3.0
