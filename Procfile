@@ -1,1 +1,1 @@
-web: gunicorn tablecom.wsgi
+web: gunicorn Carnet.wsgi
