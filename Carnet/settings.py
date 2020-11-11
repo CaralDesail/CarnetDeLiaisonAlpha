@@ -35,7 +35,7 @@ SECRET_KEY = '4*2qmd9$$6@cd)l@&vxhfs^^y8sf6h&d1rferdid7w5$n)6y7_'
 DEBUG = True
 
 # adress allowed to communicate :
-ALLOWED_HOSTS = ['handebook.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','handebook.herokuapp.com']
 
 # Application definition
 
@@ -85,14 +85,17 @@ WSGI_APPLICATION = 'Carnet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+#Avant la tentative de déploiment heroku :
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+"""
 
+#version pour déploiment :
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -103,7 +106,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
