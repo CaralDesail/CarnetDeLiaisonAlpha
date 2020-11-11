@@ -35,7 +35,7 @@ SECRET_KEY = '4*2qmd9$$6@cd)l@&vxhfs^^y8sf6h&d1rferdid7w5$n)6y7_'
 DEBUG = True
 
 # adress allowed to communicate :
-ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
+ALLOWED_HOSTS = ['handebook.herokuapp.com']
 
 # Application definition
 
