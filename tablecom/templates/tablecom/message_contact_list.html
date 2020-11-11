@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<h1>{{ carnet.name }} {{ carnet.forename }} <span class="small"> né(e) le {{carnet.date_of_birth}}</span></h1>
+
+<p class="infos">{{carnet.num_ident}}</p>
+
+<br>
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-warning"><h4>Responsables légaux</h4></li>
+  {% for RL in newListOfRL %}
+  <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between"><div>{{RL.id}}</div>
+    <div><h5>{{RL.first_name}} {{RL.last_name}}</h5></div>
+    <div>{{RL.email}}</div>
+    <div><a href="{% url 'MessageAboutTo' carnet.id RL.id %}"><button type="button" class="btn btn-primary">Message direct</button></a></div>
+                {% empty %}
+            <p>Aucun responsable légal trouvé.</p>
+            {% endfor %}
+  </div></li>
+</ul>
+  <p></p>
+<ul class="list-group">
+  <li class="list-group-item list-group-item-info"><h4>Liste des professionnels</h4></li>
+  {% for prof in newListOfProf %}
+  <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between"><div>{{prof.id}}</div>
+    <div><h5>{{prof.first_name}} {{prof.last_name}}</h5></div>
+    <div>{{prof.email}}</div>
+    <div><a href="{% url 'MessageAboutTo' carnet.id prof.id %}"><button type="button" class="btn btn-primary">Message direct</button></a></div>
+
+                {% empty %}
+            <p>Aucun professionnel trouvé.</p>
+            {% endfor %}
+  </div></li>
+</ul>
+
+
+
+</div>
+{% endblock %}

@@ -35,9 +35,8 @@ class TemplateNewMessageFormView(SuccessMessageMixin,FormView):
 def home(request):
     print("Appel home")
 
-    listeMessages=List_Messages_By_Access(request)
-
-
+    #from ModulesComplementaires
+    listeMessages=list_messages_by_access(request)
 
     try:
         groupQS = request.user.groups.all()
@@ -69,3 +68,7 @@ def new_MessagePerso(request):
         lastEntryToAddinCorrespondanceTable(request)
 
     return render(request, 'DJInterCom/new_MessagePerso.html', locals())
+
+def messageAboutTo(request,id_carnet,id_correspondant):
+    print("A propos du carnet ", id_carnet, " et du correspondant ",id_correspondant )
+    return render(request,'DJInterCom/accueil.html',locals())

@@ -146,18 +146,31 @@ def ChildSNotebookVisu(request,id_carnet):
         carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
         print("Ouverture d'un carnet",id_carnet, carnet)
 
-        listProfString = carnet.id_prof_auth #catch list of id of profs
-        newListOfProf=list_of_prof(listProfString) #call external function that returns list of professionnals
+
 
         listArticlesString= carnet.articles_id #catch list of articles ID
 
         newListOfArticles=list_of_articles(listArticlesString)
         newListOfArticles.reverse() #reverse list of articles to makes the last wroten the first printend
-        print(newListOfProf)
+
 
 
 
         return render(request, 'tablecom/ChildSNotebook.html', locals())
+
+def Message_Contact_ListView(request, id_carnet):
+    #call the list of contacts
+    print("le carnet appelé est ",id_carnet)
+    carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
+    listProfString = carnet.id_prof_auth  # catch list of id of profs
+    newListOfProf = list_of_prof(listProfString)  # call external function that returns list of contacts
+    print("Liste des pros : ",newListOfProf)
+
+    listRLString = carnet.id_RespLeg # catch list of id of RL
+    newListOfRL = list_of_prof(listRLString) # use same function that return list of RL
+    print("Liste des RL", newListOfRL)
+
+    return render(request, 'tablecom/message_contact_list.html', locals())
 
 def NewArticle(request,id_carnet):
     if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):

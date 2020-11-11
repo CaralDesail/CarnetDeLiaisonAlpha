@@ -12,34 +12,10 @@
 
 <br>
 
-    <table class="table-sm">
-
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Liste des professionnels</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {% for prof in newListOfProf %}
-        <tr>
-            <th scope="row">{{prof.id}} <div class="marge3"></div> </th>
-          <td><h4> {{prof.first_name}} {{prof.last_name}}</h4></td>
-          <td>{{prof.email}}</td>
 
 
-                {% empty %}
-            <p>Aucun professionnel trouvé.</p>
-            {% endfor %}
-        </tr>
-      </tbody>
-
-    </table>
-<br><br>
-
+<div class="d-flex justify-content-end"><a href="{% url 'Message_Contact_List' carnet.id %}"><button type="button" class="btn btn-primary">Liste des intervenants
+</button></a></div><p></p>
 <p><a href="{% url 'NewArticle' carnet.id %}"><button type="button" class="btn btn-primary">Ecrire nouvelle transmission
 </button></a></p>
 

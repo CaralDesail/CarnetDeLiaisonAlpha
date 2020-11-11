@@ -9,6 +9,7 @@ from tablecom.models import *
 class MessagePerso(models.Model):
     titre = models.CharField(max_length=100)
     auteurID = models.CharField(max_length=6)
+    AttachedChildNotebookID = models.CharField(max_length=7)
     contenu = models.TextField(null=True)
     date = models.DateTimeField(default=timezone.now,
                                 verbose_name="Date d'envoi'")

@@ -25,6 +25,7 @@ Vous êtes connecté, {{ user.username }} !
 <form method="post" action="{% url 'connexion' %}">
 
     {% csrf_token %}
+
     {{ form.as_p }}
 
      <div class="d-flex justify-content-end">

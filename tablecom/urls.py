@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('Carnets',views.ChildSNotebookListVisu, name="ChildSNotebookListVisu"),
     path('CarnetVisu/<id_carnet>',views.ChildSNotebookVisu, name="ChildSNotebookVisu"),
+    path('Message_Contact_List/<id_carnet>',views.Message_Contact_ListView, name="Message_Contact_List"),
     path('NewCSNB', views.ChildSNotebookCreatView, name="ChildSNotebookCreatView"),
     path('NewArticle/<id_carnet>',views.NewArticle, name="NewArticle"),
     path('ProCreat', views.ProCreatView, name='ProCreat'),
