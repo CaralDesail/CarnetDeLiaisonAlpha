@@ -14,10 +14,23 @@
 
 
 
-<div class="d-flex justify-content-end"><a href="{% url 'Message_Contact_List' carnet.id %}"><button type="button" class="btn btn-primary">Liste des intervenants
-</button></a></div><p></p>
-<p><a href="{% url 'NewArticle' carnet.id %}"><button type="button" class="btn btn-primary">Ecrire nouvelle transmission
-</button></a></p>
+<div class="d-flex justify-content-end">
+    <a href="{% url 'Message_Contact_List' carnet.id %}">
+        <button type="button" class="btn btn-primary">
+            <img src="/static/images/people.svg"/>
+            Liste des intervenants
+        </button>
+    </a>
+</div>
+
+    <p></p>
+<p>
+    <a href="{% url 'NewArticle' carnet.id %}">
+        <button type="button" class="btn btn-primary">
+            <img src="/static/images/write.svg"/>
+            Ecrire nouvelle transmission
+        </button>
+    </a></p>
 
 
 

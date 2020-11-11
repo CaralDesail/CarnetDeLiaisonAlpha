@@ -17,12 +17,14 @@
   <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between"><div>{{RL.id}}</div>
     <div><h5>{{RL.first_name}} {{RL.last_name}}</h5></div>
     <div>{{RL.email}}</div>
-    <div><a href="{% url 'MessageAboutTo' carnet.id RL.id %}"><button type="button" class="btn btn-primary">Message direct</button></a></div>
-                {% empty %}
-            <p>Aucun responsable légal trouvé.</p>
-            {% endfor %}
+    <div><a href="{% url 'MessageAboutTo' carnet.id RL.id %}"><button type="button" class="btn btn-primary"><img src="/static/images/message_bulle_carree.svg"/> Message direct</button></a></div>
   </div></li>
 </ul>
+
+    {% empty %}
+            <p>Aucun responsable légal trouvé.</p>
+            {% endfor %}
+
   <p></p>
 <ul class="list-group">
   <li class="list-group-item list-group-item-info"><h4>Liste des professionnels</h4></li>
@@ -30,13 +32,13 @@
   <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between"><div>{{prof.id}}</div>
     <div><h5>{{prof.first_name}} {{prof.last_name}}</h5></div>
     <div>{{prof.email}}</div>
-    <div><a href="{% url 'MessageAboutTo' carnet.id prof.id %}"><button type="button" class="btn btn-primary">Message direct</button></a></div>
-
+    <div><a href="{% url 'MessageAboutTo' carnet.id prof.id %}"><button type="button" class="btn btn-primary"><img src="/static/images/message_bulle_carree.svg"/> Message direct</button></a></div>
+  </div></li>
+</ul>
                 {% empty %}
             <p>Aucun professionnel trouvé.</p>
             {% endfor %}
-  </div></li>
-</ul>
+
 
 
 
