@@ -56,7 +56,7 @@
     <div class="d-flex flex-wrap align-items-center"> <!-- Boite du bandeau du haut qui va mettre le premier élément à gauche, et les autres à distance à droite -->
           <div class="mr-auto p-2 ">
             <div class="d-flex justify-content-start">
-                <div class="p-2"><a href="{% url 'accueil' %}"><img src="{% static 'images/home.svg' %}" class="img-fluid"></a></div>
+                <div class="p-2"><a href="{% url 'accueil' %}"><img src="/static/images/home.svg" class="img-fluid"></a></div>
                 <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary"><p>{{ user.email }}</p></h6></div>
             </div>
           </div>
