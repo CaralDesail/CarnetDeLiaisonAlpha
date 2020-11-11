@@ -124,6 +124,7 @@ def RLCreatView(request):
     return render(request, 'tablecom/RLCreat.html', locals())
 
 def ChildSNotebookListVisu(request):
+    datetrans = datetime.now()
     ChildSNBsInput=list(ChildSNotebook.objects.all())
     ChildSNBs=[]
     for CSNB in ChildSNBsInput:
@@ -137,7 +138,7 @@ def ChildSNotebookListVisu(request):
 
 
     print(ChildSNBs)
-    return render(request, 'tablecom/ChildSNotebookListVisu.html', {'liste_carnets': ChildSNBs})
+    return render(request, 'tablecom/ChildSNotebookListVisu.html', {'liste_carnets': ChildSNBs,'date':datetrans})
 
 def ChildSNotebookVisu(request,id_carnet):
 
@@ -149,7 +150,9 @@ def ChildSNotebookVisu(request,id_carnet):
         newListOfProf=list_of_prof(listProfString) #call external function that returns list of professionnals
 
         listArticlesString= carnet.articles_id #catch list of articles ID
+
         newListOfArticles=list_of_articles(listArticlesString)
+        newListOfArticles.reverse() #reverse list of articles to makes the last wroten the first printend
         print(newListOfProf)
 
 

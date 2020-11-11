@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 
 {% extends "tablecom/base.html" %}
-{% block title %}Connexion{% endblock %}
 {% block nav %} {% endblock %}
 {% block content %}
 
 
-
+<p></p><p></p>
 <div class="container">
+    <h1>Connexion</h1>
+    <p></p>
 
-<h1>Se connecter</h1>
+    <div class="d-flex justify-content-center">
 
 {% if error %}
 <p><strong>Utilisateur inconnu ou mauvais de mot de passe.</strong></p>
@@ -20,13 +21,25 @@ Vous êtes connecté, {{ user.username }} !
 <meta http-equiv="REFRESH" content="1;url=accueil">
 
 {% else %}
+<div class="jumbotron">
 <form method="post" action="{% url 'connexion' %}">
+
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Se connecter" />
-</form>
 
+     <div class="d-flex justify-content-end">
+    <input type="submit" class="btn btn-primary btn-lg" value="Se connecter" />
+     </div>
+
+</form><p></p>
+    <hr class="my-4">
+    <a href="{% url 'password_reset' %}">Mot de passe oublié ?</a>
+
+
+
+</div>
 
 {% endif %}
 </div>
-{% endblock %}
+
+{% endblock %}    </div>

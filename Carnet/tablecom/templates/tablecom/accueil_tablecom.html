@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-    <style type="text/css">
-      [class*="col"] { margin-bottom: 40px; }
 
-    </style>
 {% extends "tablecom/base.html" %}
+{% load static %}
 {% block title %}Page d'accueil{% endblock %}
 
 {% block content %}
     {% if user.is_authenticated %}
+
+        {% if user.is_superuser %}
     <div class="container">
         <div class="row">
             <div class="col">
@@ -18,7 +18,7 @@
             <div class="col">
                 <h3>Vous êtes connecté, {{ user.username }} !</h3>
                 <p class="lead">Groupe : {{userGroupName}}</p>
-                </div>
+            </div>
             <div class="col">
                 <p><a href="{% url 'ChildSNotebookListVisu' %}"><button type="button" class="btn btn-primary">Carnets</button></a>
                 </p>
@@ -27,31 +27,8 @@
 
             </div>
         </div>
-</div>
-
-        {% else %}
-
-             <div class="container" margin-right="auto" margin-left="auto">
-        <div class="row">
-            <div class="col">
-                <p></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h4>Non authentifié : Veuillez vous connecter. </h4><a href="{% url 'connexion' %}"><button type="button" class="btn btn-primary">Se connecter</button></a>
-                </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h4>Si vous n'avez pas de compte, <a href="{% url 'ContactUs' %}"><button type="button" class="btn btn-outline-dark">contactez nous</button></a> </h4>
-                </div>
-        </div>
-</div>
-
-        {% endif %}
-
-        {% if user.is_superuser %}<br><br>
+    </div>
+<br><br>
     <div class="container">
     Acces super user :<br><br>
             <p><a href="{% url 'ProCreat' %}"><button type="button" class="btn btn-info">Nouveau professionnel</button></a>
@@ -68,5 +45,84 @@
             <p><a href="{% url 'AdminTools' %}"><button type="button" class="btn btn-info">AdminTools</button></a>
             </p>
     </div>
+        {% else %}
+            <meta http-equiv="REFRESH" content="0;url=Carnets"><!-- cette ligne va rediriger l'utilisateur connecté direct à carnets-->
+        {% endif %}
+    {% else %} <!-- If user is disconnected -->
+
+
+<div class="container" style="background:#ffbaba !important;">
+
+    <div class="d-flex flex-wrap align-items-center"> <!-- Boite du bandeau du haut qui va mettre le premier élément à gauche, et les autres à distance à droite -->
+          <div class="mr-auto p-2 ">
+            <div class="d-flex justify-content-start">
+                <div class="p-2"><a href="{% url 'accueil' %}"><img src="{% static 'images/logoHandEbookCouleurSmall.png' %}" class="img-fluid "></a></div>
+                <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary"><p>{{ user.email }}</p></h6></div>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="p-2 ">
+            <div class="d-flex flex-column">
+              <div class="p-2"><a href="{% url 'connexion' %}"><button type="button" class="btn btn-primary btn-lg">Se connecter</button></a></div>
+              <div class="p-2"><a href="{% url 'ContactUs' %}"><button type="button" class="btn btn-primary btn-lg">S'inscrire</button></a></div>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+
+   </nav>
+
+
+
+
+
+             <div class="container" margin-right="auto" margin-left="auto">
+
+                <p></p>
+
+                <div class="jumbotron" >
+                            <h3>Hand e-Book est une plateforme de coordination au service des enfants avec troubles DYS : </h3>
+                        <p class="lead">
+                            Elle permet aux parents, professionnels de santé, de l'éducation et du social
+                            de communiquer de façon sécurisée.
+                        </p>
+                        <p class="lead">
+                            Hand e-Book facilite la coordination inter-disciplinaire et personnalise le suivi thérapeutique et éducatif de l'enfant. </p>
+                        <p class="lead">
+                            Les professionnels de l'éducation et les professionnels de santé peuvent alors homogénéiser leurs stratégies pédagogiques et de santé et ainsi favoriser l'inclusion scolaire de l'enfant en école ordinaire.
+                        </p>
+                        <p class="lead">
+                            Hand e-Book soutient les parents en facilitant les échanges de tous les interlocuteurs autour de leur enfant.
+                            Hand e-Book a vocation à s'adresser à tous les élèves en difficultés scolaires : de la maternelle à l'enseignement supérieur.
+                        </p>
+                </div>
+
+                 <div>
+                    <article >
+                        <div class="row justify-content-md-center">
+                        <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fpartenaireinclusionscolaire%2Fvideos%2F2440013289624848%2F&show_text=false&width=560" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" allowFullScreen="true"></iframe>
+                        </div>
+                    </article>
+                    <article>
+                    <p></p>
+                        <div class="row justify-content-md-center"><a href="{% url 'ContactUs' %}"><button type="button" class="btn btn-primary btn-lg">S'inscrire</button></a></div>
+                        <p class="centrage_simple_inline">En créant un compte, vous acceptez notre <a href="#" >Charte</a> et nos <a href="#" >CGU</a>.</p>
+                    </article>
+                     </div>
+                <footer>
+                    <p class="footer_licence">© 2020 Hand eBook et contributeurs individuels.</p>
+                </footer>
+            </div>
+
+
+        {% endif %}
+
+        {% if user.is_superuser %}
         {% endif %}
 {% endblock %}
