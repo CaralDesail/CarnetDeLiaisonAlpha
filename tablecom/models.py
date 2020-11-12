@@ -63,7 +63,7 @@ class ContactUs(models.Model):
     username = models.CharField(max_length=255, verbose_name="Nom d'utilisateur",blank=True)
     first_name = models.CharField(max_length=255, verbose_name="Prénom",blank=True)
     last_name= models.CharField(max_length=255, verbose_name="Nom",blank=True)
-    num_ident = models.CharField(max_length=255, verbose_name="Numéro d'identité",blank=True)
+    #num_ident = models.CharField(max_length=255, verbose_name="Numéro d'identité",blank=True)
     phone = models.CharField(max_length=60, blank=True,verbose_name="Téléphone",default="")
     TYPE_SELECT = (
         ('0', 'Je ne sais pas'),

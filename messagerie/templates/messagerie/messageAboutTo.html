@@ -1,0 +1,77 @@
+{% extends "tablecom/base.html" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<H2>Messagerie avec {{ ContactSel.first_name }} {{ ContactSel.last_name }}</H2>
+
+<!--Content part -->
+
+{% for message in listeMessagesAT %}
+
+<p>
+
+
+  {% if message.isAuteur %}
+
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-primary">{{ message.contenu }}</li>
+      </ul>
+    </div>
+
+  </div>
+  </div>
+
+  {% else %}
+
+  <div class="container">
+  <div class="row">
+        <div class="col-sm-1"></div>
+    <div class="col-sm-8">
+
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-secondary">{{ message.contenu }}</li>
+      </ul>
+
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+  </div>
+
+</p>
+
+  {% endif %}
+
+
+
+{% empty %}
+    <p>Vous n'avez encore échangé aucun message</p>
+        {% endfor %}
+
+
+<!-- Answer part -->
+<p>
+{% if envoi %}Message envoyé !
+     <meta http-equiv="REFRESH" content="0;url="><!-- cette ligne va rediriger l'utilisateur connecté direct à carnets-->
+{% else %}
+
+
+<form method="post" action="">
+  {% csrf_token %}
+  <div class="container-fluid ">
+  {{ form.as_p }}
+    </div>
+  <input type="submit" value="Envoyer"/>
+</form>
+
+{% endif %}
+
+  </p>
+
+</div>
+{% endblock %}

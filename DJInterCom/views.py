@@ -68,7 +68,3 @@ def new_MessagePerso(request):
         lastEntryToAddinCorrespondanceTable(request)
 
     return render(request, 'DJInterCom/new_MessagePerso.html', locals())
-
-def messageAboutTo(request,id_carnet,id_correspondant):
-    print("A propos du carnet ", id_carnet, " et du correspondant ",id_correspondant )
-    return render(request,'DJInterCom/accueil.html',locals())

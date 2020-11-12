@@ -17,7 +17,25 @@
   <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between flex-wrap"><div>{{RL.id}}</div>
     <div><h5>{{RL.first_name}} {{RL.last_name}}</h5></div>
     <div>{{RL.email}}</div>
-    <div><a href="{% url 'MessageAboutTo' carnet.id RL.id %}"><button type="button" class="btn btn-primary"><img src="/static/images/message_bulle_carree.svg"/> Message direct</button></a></div>
+    <div>
+
+            {% if user.pk != RL.id %}
+        <a href="{% url 'MessageAboutTo' carnet.id RL.id %}">
+            <button type="button" class="btn btn-primary">
+                <img src="/static/images/message_bulle_carree.svg"/>
+                Message direct
+            </button>
+        </a>
+            {% else %}
+            <button  class="btn btn-outline-secondary">
+                <img src="/static/images/message_bulle_carree.svg"/>
+                Message direct
+            </button>
+            {% endif %}
+
+
+
+    </div>
   </div></li>
 </ul>
 
@@ -29,11 +47,28 @@
 <ul class="list-group">
   <li class="list-group-item list-group-item-info"><h4>Liste des professionnels</h4></li>
   {% for prof in newListOfProf %}
-  <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between flex-wrap"><div>{{prof.id}}</div>
+  <li class="list-group-item list-group-item-secondary">
+    <div class="d-flex justify-content-between flex-wrap"><div>{{prof.id}}</div>
     <div><h5>{{prof.first_name}} {{prof.last_name}}</h5></div>
     <div>{{prof.email}}</div>
-    <div><a href="{% url 'MessageAboutTo' carnet.id prof.id %}"><button type="button" class="btn btn-primary"><img src="/static/images/message_bulle_carree.svg"/> Message direct</button></a></div>
-  </div></li>
+    <div>
+            {% if user.pk != prof.id %}
+        <a href="{% url 'MessageAboutTo' carnet.id prof.id %}">
+            <button type="button" class="btn btn-primary">
+                <img src="/static/images/message_bulle_carree.svg"/>
+                Message direct
+            </button>
+        </a>
+            {% else %}
+            <button  class="btn btn-outline-secondary">
+                <img src="/static/images/message_bulle_carree.svg"/>
+                Message direct
+            </button>
+            {% endif %}
+
+    </div>
+    </div>
+  </li>
 </ul>
                 {% empty %}
             <p>Aucun professionnel trouvé.</p>
