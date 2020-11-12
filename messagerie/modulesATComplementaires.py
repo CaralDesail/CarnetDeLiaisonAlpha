@@ -9,16 +9,17 @@ def list_AT_messages(request, id_carnet, id_correspondant):
 
     ListMessagesFiltred = []
     for MessageATFiltred in QueryMessagesFiltred:
-
+        print("Message trouvé: ", MessageATFiltred.contenu, " adressé par ",MessageATFiltred.auteurID, " recu par ",
+              MessageATFiltred.receiverID)
         # the two following will filter if id correspondant and user are each in emiter ou receiver ...
         if id_correspondant != MessageATFiltred.auteurID and id_correspondant != MessageATFiltred.receiverID:
             print ("Break car on cherche un id correspondant ",id_correspondant, " dans Auteur ou Receiver")
-            break
+            continue
         if request.user.pk != int(MessageATFiltred.auteurID) and request.user.pk != int(MessageATFiltred.receiverID):
             print ("Break car on cherche un request.user n° ",request.user.pk, " dans Auteur ou Receiver")
-            break
+            continue
 
-        print("Message trouvé: ", MessageATFiltred.contenu)
+
         # we add status if user is emiter or receiver
         if int(MessageATFiltred.auteurID) == int(request.user.pk):
             print("yes !")

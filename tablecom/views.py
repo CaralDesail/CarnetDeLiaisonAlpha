@@ -176,8 +176,8 @@ def NewArticle(request,id_carnet):
     if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
         carnet=get_object_or_404(ChildSNotebook, id=id_carnet)
         id_of_current_user=request.user.pk
-        premodel=Article(id_Professionnal=id_of_current_user)
-        form = NewArticleForm(request.POST or None, instance=premodel)
+        premodelNA=Article(id_Professionnal=id_of_current_user)
+        form = NewArticleForm(request.POST or None, instance=premodelNA)
         if form.is_valid():
             print("Formulaire validé")
             envoi = True

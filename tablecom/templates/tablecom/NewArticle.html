@@ -7,7 +7,7 @@
 <div class="container">
 
 {% if envoi %}L'article à bien été créé !
-     <meta http-equiv="REFRESH" content="0;url=Carnets"><!-- cette ligne va rediriger l'utilisateur connecté direct à carnets-->
+     <meta http-equiv="REFRESH" content="0;url=../CarnetVisu/{{ carnet.id }}"><!-- cette ligne va rediriger l'utilisateur connecté direct à carnets-->
 {% else %}
 
     <H3>Message de {{user.first_name}} {{user.last_name}} concernant {{ carnet.name }} {{ carnet.forename }} né(e) le {{carnet.date_of_birth}} </H3>
