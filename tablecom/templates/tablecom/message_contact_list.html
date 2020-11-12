@@ -23,13 +23,14 @@
         <a href="{% url 'MessageAboutTo' carnet.id RL.id %}">
             <button type="button" class="btn btn-primary">
                 <img src="/static/images/message_bulle_carree.svg"/>
-                Message direct
+                Messagerie
             </button>
         </a>
             {% else %}
-            <button  class="btn btn-outline-secondary">
+        <!-- grey non-link button if user == correspondant !-->
+            <button  class="btn btn-outline-secondary " disabled>
                 <img src="/static/images/message_bulle_carree.svg"/>
-                Message direct
+                Messagerie
             </button>
             {% endif %}
 
@@ -56,13 +57,14 @@
         <a href="{% url 'MessageAboutTo' carnet.id prof.id %}">
             <button type="button" class="btn btn-primary">
                 <img src="/static/images/message_bulle_carree.svg"/>
-                Message direct
+                Messagerie
             </button>
         </a>
             {% else %}
-            <button  class="btn btn-outline-secondary">
+        <!-- grey non-link button if user == correspondant !-->
+            <button  class="btn btn-outline-secondary" disabled>
                 <img src="/static/images/message_bulle_carree.svg"/>
-                Message direct
+                Messagerie
             </button>
             {% endif %}
 

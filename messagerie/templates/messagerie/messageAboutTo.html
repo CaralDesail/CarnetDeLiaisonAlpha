@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="container">
-<H2>Messagerie avec {{ ContactSel.first_name }} {{ ContactSel.last_name }}</H2>
+    <H3>Messagerie <small>avec</small> {{ ContactSel.first_name }} {{ ContactSel.last_name }} <small>concernant</small> {{ carnet.name }} {{ carnet.forename}}</H3>
 
 <!--Content part -->
 
@@ -20,8 +20,14 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-8">
       <ul class="list-group">
-        <li class="list-group-item list-group-item-primary">{{ message.contenu }}</li>
+        <li class="list-group-item list-group-item-primary">
+            <div class="d-flex justify-content-between">
+                <div>{{ message.contenu }}</div>
+                <div></div>
+            </div>
+        </li>
       </ul>
+        <small><small>{{ message.date }}</small></small>
     </div>
 
   </div>
@@ -35,9 +41,14 @@
     <div class="col-sm-8">
 
       <ul class="list-group">
-        <li class="list-group-item list-group-item-secondary">{{ message.contenu }}</li>
+        <li class="list-group-item list-group-item-secondary">
+            <div class="d-flex justify-content-between">
+                <div>{{ message.contenu }}</div>
+                <div></div>
+            </div>
+        </li>
       </ul>
-
+<small><small>{{ message.date }}</small></small>
     </div>
     <div class="col-sm-3"></div>
   </div>
@@ -54,21 +65,25 @@
         {% endfor %}
 
 
+
+
 <!-- Answer part -->
 <p>
 {% if envoi %}Message envoyé !
-     <meta http-equiv="REFRESH" content="0;url="><!-- cette ligne va rediriger l'utilisateur connecté direct à carnets-->
+     <meta http-equiv="REFRESH" content="0;url="><!-- cette ligne va rediriger l'utilisateur connecté direct à la même page-->
 {% else %}
 
-
+    <div class="d-flex justify-content-center">
+    <div class="jumbotron">
 <form method="post" action="">
   {% csrf_token %}
-  <div class="container-fluid ">
-  {{ form.as_p }}
-    </div>
-  <input type="submit" value="Envoyer"/>
-</form>
 
+  {{ form.as_p }}
+
+     <div class="d-flex justify-content-end">
+    <input type="submit" class="btn btn-primary " value="Envoyer" /></div>
+</form>
+        </div>
 {% endif %}
 
   </p>
