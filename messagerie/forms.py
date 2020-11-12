@@ -10,5 +10,5 @@ class MessagePersoATForm(forms.ModelForm):
         #fields = '__all__'
         fields = ('contenu',)
         widgets = {
-          'contenu': Textarea(attrs={'rows':5, 'cols':40}),
+          'contenu': Textarea(attrs={'rows':5, 'cols':40, 'placeholder':"Votre message ..."}),
         }
