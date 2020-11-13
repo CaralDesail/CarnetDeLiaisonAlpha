@@ -105,6 +105,7 @@ def notif_fil_reset(request,carnet_id):
     entreeNotifIdUser.NotifFil = newString
     entreeNotifIdUser.save()
 
+
 def notif_fil_global_count(request):
     entreeNotifIdUser = Notifications.objects.get(user_id=request.user.pk) #entry of user's notification table
     dicoTemp=stringTodict(entreeNotifIdUser.NotifFil)
@@ -112,6 +113,7 @@ def notif_fil_global_count(request):
     for valeur in dicoTemp.values():
         somme+=int(valeur)
     return somme
+
 
 def notif_fil_by_CNB(request,carnet_id):
     print("Recherche de notif pour", carnet_id)
