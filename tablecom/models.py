@@ -38,7 +38,7 @@ class CategoriePro(models.Model):
 
 
 class Article(models.Model): #table of differents "notes", or "articles" that will be created by Pro or LR
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True) #is active or not (suppressed ?)
     id_Professionnal=models.IntegerField(verbose_name='Id Professionnel')
     title = models.CharField(max_length=255, verbose_name="Titre")
     content = models.TextField(null=False, verbose_name="Contenu")

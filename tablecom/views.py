@@ -9,12 +9,13 @@ from django.contrib.auth.decorators import permission_required
 from .modules_complementaires import *
 from .admin_compl_tools import *
 from .permissions import *
+from notifications.modules_complementaires import *
 
 
 def home(request):
+
     date=datetime.now()
-    #CurrentUserP=request.user  // not used because "user" can be called directly in template : no need to call it
-    #print(CurrentUserP.username)
+
     try:
         groupQS = request.user.groups.all()
         userGroupName = groupQS[0].name
@@ -38,6 +39,8 @@ def ContactUs(request):
     return render(request, 'tablecom/ContactUs.html',locals())
 
 def MyProfile(request):
+    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
+
     groupQS = request.user.groups.all()
     userGroupName = groupQS[0].name
     userProfil = Profil.objects.get(user_id=request.user.pk)
@@ -83,6 +86,98 @@ def deconnexion(request):
     logout(request)
     return redirect('accueil')
 
+def ChildSNotebookListVisu(request):
+    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
+
+    CheckNCreateNotifField(request) # will call the creation of notification entry if dont exist
+
+    datetrans = datetime.now()
+    ChildSNBsInput=list(ChildSNotebook.objects.all())
+    ChildSNBs=[]
+    for CSNB in ChildSNBsInput:
+        pkAct=CSNB.pk
+
+        #print("ID du carnet actuel= ",pkAct)
+        if request.user.has_perm("tablecom.CSNB{0}_access".format(pkAct)):
+            #print("acces")
+            CSNB.notif_fil=notif_fil_by_CNB(request, pkAct)
+            ChildSNBs.append(CSNB)
+        else:
+            #print("No acces to ",CSNB.pk)
+            True
+
+
+    print(ChildSNBs)
+    return render(request, 'tablecom/ChildSNotebookListVisu.html', {'liste_carnets': ChildSNBs,'date':datetrans, 'CarrierList':CarrierList})
+
+def ChildSNotebookVisu(request,id_carnet):
+    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
+    if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
+
+        carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
+        print("Ouverture d'un carnet",id_carnet, carnet)
+
+
+
+        listArticlesString= carnet.articles_id #catch list of articles ID
+
+        newListOfArticles=list_of_articles(listArticlesString)
+        newListOfArticles.reverse() #reverse list of articles to makes the last wroten the first printend
+
+        notif_fil_reset(request,id_carnet) #will call this function in notifications/modules_complementaires.py
+
+
+        return render(request, 'tablecom/ChildSNotebook.html', locals())
+
+def Message_Contact_ListView(request, id_carnet):
+    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
+    #call the list of contacts
+    print("le carnet appelé est ",id_carnet)
+    carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
+    listProfString = carnet.id_prof_auth  # catch list of id of profs
+    newListOfProf = list_of_prof(listProfString)  # call external function that returns list of contacts
+    print("Liste des pros : ",newListOfProf)
+
+    listRLString = carnet.id_RespLeg # catch list of id of RL
+    newListOfRL = list_of_prof(listRLString) # use same function that return list of RL
+    print("Liste des RL", newListOfRL)
+
+    return render(request, 'tablecom/message_contact_list.html', locals())
+
+def NewArticle(request,id_carnet):
+    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
+
+    if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
+        carnet=get_object_or_404(ChildSNotebook, id=id_carnet)
+        id_of_current_user=request.user.pk
+        premodelNA=Article(id_Professionnal=id_of_current_user)
+        form = NewArticleForm(request.POST or None, instance=premodelNA)
+        if form.is_valid():
+            carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
+            list_of_correspondants = list_of_prof(carnet.id_prof_auth + carnet.id_RespLeg)
+            notif_fil_add_one(request, id_carnet, list_of_correspondants)
+            print("Formulaire validé")
+            envoi = True
+            form.save()
+            dernier_article=Article.objects.latest('date')
+            print(dernier_article.pk)
+
+            carnet.articles_id+=(";"+str(dernier_article.pk)) #will add article reference to carnet
+            carnet.save()
+
+        return render(request, 'tablecom/NewArticle.html', locals())
+
+def GlobalCarrier(request):
+    # will contain list of variables necessary in each page
+    NumberOfMessagesNotifications = 0
+    NumberOfFilNotifications = notif_fil_global_count(request)
+
+
+    CarrierList=[NumberOfMessagesNotifications,NumberOfFilNotifications]
+    return (CarrierList)
+
+def AdminTools(request):
+    return render(request,'tablecom/AdminTools.html',locals())
 
 
 @permission_required('auth.add_user')
@@ -122,77 +217,6 @@ def RLCreatView(request):
         form.save()
 
     return render(request, 'tablecom/RLCreat.html', locals())
-
-def ChildSNotebookListVisu(request):
-    datetrans = datetime.now()
-    ChildSNBsInput=list(ChildSNotebook.objects.all())
-    ChildSNBs=[]
-    for CSNB in ChildSNBsInput:
-        pkAct=CSNB.pk
-        print("ID du carnet actuel= ",pkAct)
-        if request.user.has_perm("tablecom.CSNB{0}_access".format(pkAct)):
-            print("acces")
-            ChildSNBs.append(CSNB)
-        else:
-            print("No acces")
-
-
-    print(ChildSNBs)
-    return render(request, 'tablecom/ChildSNotebookListVisu.html', {'liste_carnets': ChildSNBs,'date':datetrans})
-
-def ChildSNotebookVisu(request,id_carnet):
-
-    if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
-        carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
-        print("Ouverture d'un carnet",id_carnet, carnet)
-
-
-
-        listArticlesString= carnet.articles_id #catch list of articles ID
-
-        newListOfArticles=list_of_articles(listArticlesString)
-        newListOfArticles.reverse() #reverse list of articles to makes the last wroten the first printend
-
-
-
-
-        return render(request, 'tablecom/ChildSNotebook.html', locals())
-
-def Message_Contact_ListView(request, id_carnet):
-    #call the list of contacts
-    print("le carnet appelé est ",id_carnet)
-    carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
-    listProfString = carnet.id_prof_auth  # catch list of id of profs
-    newListOfProf = list_of_prof(listProfString)  # call external function that returns list of contacts
-    print("Liste des pros : ",newListOfProf)
-
-    listRLString = carnet.id_RespLeg # catch list of id of RL
-    newListOfRL = list_of_prof(listRLString) # use same function that return list of RL
-    print("Liste des RL", newListOfRL)
-
-    return render(request, 'tablecom/message_contact_list.html', locals())
-
-def NewArticle(request,id_carnet):
-    if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
-        carnet=get_object_or_404(ChildSNotebook, id=id_carnet)
-        id_of_current_user=request.user.pk
-        premodelNA=Article(id_Professionnal=id_of_current_user)
-        form = NewArticleForm(request.POST or None, instance=premodelNA)
-        if form.is_valid():
-            print("Formulaire validé")
-            envoi = True
-            form.save()
-            dernier_article=Article.objects.latest('date')
-            print(dernier_article.pk)
-
-            carnet.articles_id+=(";"+str(dernier_article.pk)) #will add article reference to carnet
-            carnet.save()
-
-        return render(request, 'tablecom/NewArticle.html', locals())
-
-
-def AdminTools(request):
-    return render(request,'tablecom/AdminTools.html',locals())
 
 @permission_required('auth.change_permission')
 def AdminTools_PermissionCarnetRecreation(request): #will regenerate all permissions of different carnets

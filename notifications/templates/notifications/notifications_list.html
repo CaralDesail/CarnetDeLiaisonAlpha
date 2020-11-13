@@ -1,0 +1,17 @@
+{% extends "tablecom/base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <h2>Notifications</h2>{% for notif in object_list %}
+    <ul>
+
+            <li>ID : {{ notif.id }}</li>
+        <li>Messages : {{ notif.NotifMessages }}</li>
+        <li>Fil : {{ notif.NotifFil }}</li>
+        <li>User_ID : {{ notif.user_id }}</li>
+
+    </ul>{% endfor %}
+</div>
+{% endblock %}
+

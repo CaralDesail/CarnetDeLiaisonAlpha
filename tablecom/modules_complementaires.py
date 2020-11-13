@@ -29,7 +29,7 @@ def list_of_articles(string_of_articles):
     for article in listIDarticles:
         try :
             articleSel=Article.objects.get(id=article)
-            print(articleSel.title)
+            #print(articleSel.title)
             #print("les numero de l'auteur :",articleSel.id_Professionnal, "ce qui correspond à :",User.objects.get(pk=articleSel.id_Professionnal).first_name,User.objects.get(pk=articleSel.id_Professionnal).last_name)
             articleSel.auteur_first_name=User.objects.get(pk=articleSel.id_Professionnal).first_name
             articleSel.auteur_last_name=User.objects.get(pk=articleSel.id_Professionnal).last_name

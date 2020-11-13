@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% extends "tablecom/base.html" %}
+{% load static %}
 {% block title %}Page d'accueil{% endblock %}
 {% block content %}
  <div class="container">
@@ -11,9 +12,30 @@
 
 
 {% for carnet in liste_carnets %}
+
 <a href="{% url 'ChildSNotebookVisu' carnet.id %}" class="list-group-item list-group-item-action list-group-item-secondary">
-    	<h3>{{ carnet.name }} {{ carnet.forename }}</h3>
-    	<p> Date de naissance : {{carnet.date_of_birth}} || Numéro SS : {{carnet.num_ident}} </p>
+
+    <div class="row align-items-center">
+        <div class="col-10">
+            <h3>{{ carnet.name }} {{ carnet.forename }}</h3>
+            <p> Date de naissance : {{carnet.date_of_birth}} </p>
+        </div>
+        <div class="col-1">
+                  <div class="row">
+                    <img src="{% static 'images/notif_mess_perso.svg' %}" class="img-fluid">
+                      <h5><span class="badge badge-primary">{{carnet.notif_message}}</span></h5>
+                  </div>
+        </div>
+        <div class="col-1">
+                  <div class="row">
+
+                      <img src="{% static 'images/notif_fil_general.svg' %}" class="img-fluid">
+                      <h5><span class="badge badge-primary">{{carnet.notif_fil}}</span></h5>
+                  </div>
+        </div>
+
+    </div>
+
         <br>
 </a>
 {% empty %}

@@ -41,5 +41,5 @@ urlpatterns = [
 
     path('ContactUs', views.ContactUs, name="ContactUs"),
 
-    path('baseHTML', TemplateView.as_view(template_name="tablecom/base.html"))
+
 ]

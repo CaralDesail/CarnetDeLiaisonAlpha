@@ -6,3 +6,4 @@ from django.views.generic import ListView
 class NotifList(ListView):
     model = models.Notifications
     #gives object_list to template linked with url that will use this class
+

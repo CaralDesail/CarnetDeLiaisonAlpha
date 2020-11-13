@@ -1,5 +1,6 @@
 <!DOCTYPE html>
     {% load static %}
+
     {% block head %}
         <html lang="fr">
         <head>
@@ -42,8 +43,8 @@
 
           <div class="p-2 ">
             <div class="d-flex">
-                <div class="p-2"><a href="{% url 'accueil' %}"><img src="{% static 'images/notif_mess_perso.svg' %}" class="img-fluid"></a></div>
-              <div class="p-2"><img src="{% static 'images/notif_fil_general.svg' %}" class="img-fluid"></div>
+                <h6><span class="badge badge-primary">{{ CarrierList.0 }} </span></h6> <a href="{% url 'accueil' %}"><img src="{% static 'images/notif_mess_perso.svg' %}" class="img-fluid"></a>
+                .<a href="{% url 'accueil' %}"><img src="{% static 'images/notif_fil_general.svg' %}" class="img-fluid"></a><h6><span class="badge badge-primary">{{ CarrierList.1 }}</span></h6>
             </div>
           </div>
 
