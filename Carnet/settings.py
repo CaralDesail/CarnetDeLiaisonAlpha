@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tablecom',
     'DJInterCom',
-    'messagerie'
+    'messagerie',
+    'notifications'
 ]
 
 MIDDLEWARE = [
