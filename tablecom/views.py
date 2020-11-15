@@ -169,11 +169,14 @@ def NewArticle(request,id_carnet):
 
 def GlobalCarrier(request):
     # will contain list of variables necessary in each page
-    NumberOfMessagesNotifications = 0
-    NumberOfFilNotifications = notif_fil_global_count(request)
+    try:
+        NumberOfMessagesNotifications = 0
+        NumberOfFilNotifications = notif_fil_global_count(request)
 
 
-    CarrierList=[NumberOfMessagesNotifications,NumberOfFilNotifications]
+        CarrierList=[NumberOfMessagesNotifications,NumberOfFilNotifications]
+    except:
+        CarrierList = ["n", "n"]
     return (CarrierList)
 
 def AdminTools(request):

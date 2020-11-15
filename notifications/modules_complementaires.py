@@ -124,6 +124,6 @@ def notif_fil_by_CNB(request,carnet_id):
 
         number_of_notifs=dicoTemp[str(carnet_id)]
     except :
-        number_of_notifs =0
+        number_of_notifs ="n"
 
     return number_of_notifs
