@@ -116,10 +116,14 @@ def notif_fil_global_count(request):
 
 
 def notif_fil_by_CNB(request,carnet_id):
-    print("Recherche de notif pour", carnet_id)
-    entreeNotifIdUser = Notifications.objects.get(user_id=request.user.pk) #entry of user's notification table
-    dicoTemp=stringTodict(entreeNotifIdUser.NotifFil)
 
-    number_of_notifs=dicoTemp[str(carnet_id)]
+    try :
+        print("Recherche de notif pour", carnet_id)
+        entreeNotifIdUser = Notifications.objects.get(user_id=request.user.pk) #entry of user's notification table
+        dicoTemp=stringTodict(entreeNotifIdUser.NotifFil)
+
+        number_of_notifs=dicoTemp[str(carnet_id)]
+    except :
+        number_of_notifs =0
 
     return number_of_notifs
