@@ -12,32 +12,52 @@
 
 
 {% for carnet in liste_carnets %}
+<div class="btn-group align-items-center" role="group">
+        <a href="{% url 'ChildSNotebookVisu' carnet.id %}" class="list-group-item list-group-item-action list-group-item-secondary rounded pb-0 mb-1">
 
-<a href="{% url 'ChildSNotebookVisu' carnet.id %}" class="list-group-item list-group-item-action list-group-item-secondary">
+            <div class="row mr-2 ">
+                <div class="col-8">
+                    <h3>{{ carnet.name }} {{ carnet.forename }}</h3>
+                    <p> Date de naissance : {{carnet.date_of_birth}} </p>
+                </div>
+                <div class="col-4 ">
+                          <div class="row justify-content-end ">
+                              <div class="col-2">
+                                  <img src="{% static 'images/notif_fil_general.svg' %}" class="img">
+                              </div>
 
-    <div class="row align-items-center">
-        <div class="col-10">
-            <h3>{{ carnet.name }} {{ carnet.forename }}</h3>
-            <p> Date de naissance : {{carnet.date_of_birth}} </p>
-        </div>
-        <div class="col-1">
-                  <div class="row">
-                    <img src="{% static 'images/notif_mess_perso.svg' %}" class="img-fluid">
-                      <h5><span class="badge badge-primary">{{carnet.notif_message}}</span></h5>
-                  </div>
-        </div>
-        <div class="col-1">
-                  <div class="row">
+                              <div class="col-2 m-1">
+                                  {% if carnet.notif_fil == "0" %}
+                                  <h5><span class="badge badge-secondary">{{carnet.notif_fil}}</span></h5>
+                                  {% else %}
+                                  <h5><span class="badge badge-primary">{{carnet.notif_fil}}</span></h5>
+                                  {% endif %}
+                              </div>
 
-                      <img src="{% static 'images/notif_fil_general.svg' %}" class="img-fluid">
-                      <h5><span class="badge badge-primary">{{carnet.notif_fil}}</span></h5>
-                  </div>
-        </div>
+                          </div>
+                </div>
 
-    </div>
 
-        <br>
-</a>
+
+
+            </div>
+
+                <br>
+        </a>
+
+    <a href="{% url 'Message_Contact_List' carnet.id %}" class="btn btn-secondary">
+                        <div class="row ">
+                                <div class="col p-2  "><img src="{% static 'images/notif_mess_perso_white.svg' %}" class="img"></div>
+
+                                {% if carnet.notif_message != 0 %}
+                                <div class="col  ">  <h5><span class="badge badge-primary">{{carnet.notif_message}}</span></h5></div>
+                                {% else %}
+                                <div class="col pb-3 pt-3 ">  <h5><span class="badge badge-info">{{carnet.notif_message}}</span></h5></div>
+                                {% endif %}
+                        </div>
+    </a>
+</div>
+
 {% empty %}
     <p>Aucun carnet.</p>
         {% endfor %}</div></div>

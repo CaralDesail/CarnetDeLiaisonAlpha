@@ -33,7 +33,7 @@
 <div class="container" style="background:#ffbaba !important;">
 
     <div class="d-flex flex-wrap align-items-center"> <!-- Boite du bandeau du haut qui va mettre le premier élément à gauche, et les autres à distance à droite -->
-          <div class="mr-auto p-2 ">
+          <div class="mr-auto p-3 ">
             <div class="d-flex justify-content-start">
                 <div class="p-2"><a href="{% url 'accueil' %}"><img src="/static/images/home.svg" class="img-fluid"></a></div>
                 <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary"><p>{{ user.email }}</p></h6></div>
@@ -41,15 +41,30 @@
           </div>
 
 
-          <div class="p-2 ">
+          <div class="p-3 ">
+
             <div class="d-flex">
-                <h6><span class="badge badge-primary">{{ CarrierList.0 }} </span></h6> <a href="{% url 'accueil' %}"><img src="{% static 'images/notif_mess_perso.svg' %}" class="img-fluid"></a>
-                .<a href="{% url 'accueil' %}"><img src="{% static 'images/notif_fil_general.svg' %}" class="img-fluid"></a><h6><span class="badge badge-primary">{{ CarrierList.1 }}</span></h6>
+                {% if CarrierList.1 == 0 %}
+                <h6><span class="badge badge-secondary">{{ CarrierList.1 }}</span></h6>
+                {% else %}
+                <h6><span class="badge badge-primary">{{ CarrierList.1 }}</span></h6>
+                {% endif %}
+
+                <a href="{% url 'accueil' %}"><img src="{% static 'images/notif_fil_general.svg' %}" class="img-fluid p-2"></a>
+
+
+                 <a href="{% url 'accueil' %}"><img src="{% static 'images/notif_mess_perso.svg' %}" class="img-fluid p-2"></a>
+
+                {% if CarrierList.0 == 0 %}
+                <h6><span class="badge badge-secondary">{{ CarrierList.0 }} </span></h6>
+                {% else %}
+                <h6><span class="badge badge-primary">{{ CarrierList.0 }}</span></h6>
+                {% endif %}
             </div>
           </div>
 
 
-          <div class="p-2 ">
+          <div class="p- ">
             <div class="d-flex flex-column">
               <div class="p-2"><a href="{% url 'MyProfile' %}"><button type="button" class="btn btn-info btn-lg">Mes préférences</button></a></div>
               <div class="p-2"><a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger btn-block btn-lg">Se déconnecter</button></a></div>

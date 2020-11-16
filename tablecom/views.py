@@ -158,7 +158,7 @@ def NewArticle(request,id_carnet):
         form = NewArticleForm(request.POST or None, instance=premodelNA)
         if form.is_valid():
             carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
-            list_of_correspondants = list_of_prof(carnet.id_prof_auth + carnet.id_RespLeg)
+            list_of_correspondants = list_of_prof(request,carnet.id_prof_auth + carnet.id_RespLeg,id_carnet)
             notif_fil_add_one(request, id_carnet, list_of_correspondants)
             print("Formulaire validé")
             envoi = True
