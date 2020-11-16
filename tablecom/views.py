@@ -101,6 +101,7 @@ def ChildSNotebookListVisu(request):
         if request.user.has_perm("tablecom.CSNB{0}_access".format(pkAct)):
             #print("acces")
             CSNB.notif_fil=notif_fil_by_CNB(request, pkAct)
+            CSNB.notif_message=notif_message_by_CNB(request, pkAct)
             ChildSNBs.append(CSNB)
         else:
             #print("No acces to ",CSNB.pk)
@@ -113,19 +114,20 @@ def ChildSNotebookListVisu(request):
 def ChildSNotebookVisu(request,id_carnet):
 
     if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
-        CarrierList = GlobalCarrier(request)  # will carry all necessary variables (for notification, ...)
 
         carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
         print("Ouverture d'un carnet",id_carnet, carnet)
 
-
+        carnet.notif_message = notif_message_by_CNB(request, id_carnet)
 
         listArticlesString= carnet.articles_id #catch list of articles ID
 
         newListOfArticles=list_of_articles(listArticlesString)
         newListOfArticles.reverse() #reverse list of articles to makes the last wroten the first printend
 
+        """about notifications ..."""
         notif_fil_reset(request,id_carnet) #will call this function in notifications/modules_complementaires.py
+        CarrierList = GlobalCarrier(request)  # will carry all necessary variables (for notification, ...)
 
 
         return render(request, 'tablecom/ChildSNotebook.html', locals())
@@ -136,11 +138,11 @@ def Message_Contact_ListView(request, id_carnet):
     print("le carnet appelé est ",id_carnet)
     carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
     listProfString = carnet.id_prof_auth  # catch list of id of profs
-    newListOfProf = list_of_prof(listProfString)  # call external function that returns list of contacts
+    newListOfProf = list_of_prof(request,listProfString,id_carnet)  # call external function that returns list of contacts
     print("Liste des pros : ",newListOfProf)
 
     listRLString = carnet.id_RespLeg # catch list of id of RL
-    newListOfRL = list_of_prof(listRLString) # use same function that return list of RL
+    newListOfRL = list_of_prof(request,listRLString,id_carnet) # use same function that return list of RL
     print("Liste des RL", newListOfRL)
 
     return render(request, 'tablecom/message_contact_list.html', locals())
@@ -172,13 +174,19 @@ def NewArticle(request,id_carnet):
 def GlobalCarrier(request):
     # will contain list of variables necessary in each page
     try:
-        NumberOfMessagesNotifications = 0
         NumberOfFilNotifications = notif_fil_global_count(request)
 
-
-        CarrierList=[NumberOfMessagesNotifications,NumberOfFilNotifications]
     except:
-        CarrierList = [0, 0]
+        NumberOfFilNotifications = "n"
+
+
+    try :
+        NumberOfMessagesNotifications=getGlobalCountOfDirectMessage(request)
+    except :
+        raise
+        NumberOfMessagesNotifications="n"
+
+    CarrierList = [NumberOfMessagesNotifications, NumberOfFilNotifications]
         
     return (CarrierList)
 

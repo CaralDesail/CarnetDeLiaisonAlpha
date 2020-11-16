@@ -1,8 +1,9 @@
 from .forms import *
 from django.http import request
 from .models import *
+from notifications.modules_complementaires import notif_message_by_CNB_and_Correspondant
 
-def list_of_prof(listStringId):
+def list_of_prof(request,listStringId,id_carnet):
     print("Liste en string : ",listStringId)
     listIdprofs=listStringId.split(";")
     print (listIdprofs)
@@ -14,9 +15,12 @@ def list_of_prof(listStringId):
             ProfSel=User.objects.get(id=prof)
             print(type(ProfSel))
             print(ProfSel.first_name,' ', ProfSel.last_name, ' ',ProfSel.email)
+            ProfSel.NotifMessage = notif_message_by_CNB_and_Correspondant(request, id_carnet, ProfSel.pk)
             NewListProfs.append(ProfSel)
         except:
-            print("Impossible de récupérer certains professionnels: Vérifier que chaque ID existe")
+            print("Impossible de récupérer certains professionnels, ou erreur de notifications: Vérifier que chaque ID existe")
+
+
 
     return NewListProfs
 

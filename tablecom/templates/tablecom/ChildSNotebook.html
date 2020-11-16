@@ -18,8 +18,13 @@
     <a href="{% url 'Message_Contact_List' carnet.id %}">
         <button type="button" class="btn btn-primary">
             <img src="/static/images/people.svg"/>
-            Liste des intervenants
+            Intervenants
+
+            <span class="badge bg-white rounded p-0 m-0"><div class="container rounded p-1 m-0" ><img class="img-fluid w-50" src="/static/images/notif_mess_perso.svg"/>
+                <span class="badge badge-primary">{{carnet.notif_message}}</span></div></span>
+
         </button>
+
     </a>
 </div>
 

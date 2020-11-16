@@ -44,7 +44,7 @@ class Article(models.Model): #table of differents "notes", or "articles" that wi
     content = models.TextField(null=False, verbose_name="Contenu")
     date = models.DateTimeField(default=timezone.now,
                                 verbose_name="Date de parution")
-    valid_art=models.BooleanField(default=False) #validation or not of the article by legal Responsible
+    valid_art=models.BooleanField(default=True) #validation or not of the article by legal Responsible
     list_to_notify = models.TextField(null=True, verbose_name="Id des personnes notifiée") #list of differents "pro"
                                                 # that will be notified when article agreed by legal Responsible
 

@@ -34,6 +34,12 @@
             </button>
             {% endif %}
 
+            {% if RL.NotifMessage != 0 %}
+        <span class="badge bg-danger rounded ">
+            <img src="/static/images/logoMessageArrived.svg"/></span>
+            {% else %}
+            {% endif %}
+
 
 
     </div>
@@ -68,6 +74,12 @@
             </button>
             {% endif %}
 
+            {% if prof.NotifMessage != 0 %}
+        <span class="badge bg-danger rounded ">
+            <img src="/static/images/logoMessageArrived.svg"/></span>
+            {% else %}
+            {% endif %}
+
     </div>
     </div>
   </li>
@@ -75,8 +87,6 @@
                 {% empty %}
             <p>Aucun professionnel trouvé.</p>
             {% endfor %}
-
-
 
 
 </div>

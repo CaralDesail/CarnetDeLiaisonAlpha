@@ -8,12 +8,13 @@ from django.views.generic import FormView
 from django.utils import timezone
 from django.contrib.messages.views import SuccessMessageMixin
 from tablecom.views import GlobalCarrier
+from notifications.modules_complementaires import notifDirectMessageAddOne,NotifMessagesReset
 
 # Create your views here.
 def messageAboutTo(request, id_carnet, id_correspondant):
     # print("Appel pour le carnet ",id_carnet, "et le correspondant ",id_correspondant)
-    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
 
+    NotifMessagesReset(request,id_carnet,id_correspondant)
 
 
     ContactSel = User.objects.get(id=id_correspondant)
@@ -24,7 +25,6 @@ def messageAboutTo(request, id_carnet, id_correspondant):
 
 
     # answer form part
-    form = MessagePersoATForm(request.POST or None)
     premodel = MessagePersoAT(auteurID=request.user.pk, AttachedChildNotebookID=id_carnet, receiverID=id_correspondant)
     form = MessagePersoATForm(request.POST or None, instance=premodel)
 
@@ -34,5 +34,11 @@ def messageAboutTo(request, id_carnet, id_correspondant):
         print("Message Envoyé")
         envoi = True
         form.save()
+        # call of notification put
+        notifDirectMessageAddOne(request,id_carnet,id_correspondant)
+
+
+
+    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
 
     return render(request, 'messagerie/messageAboutTo.html', locals())
