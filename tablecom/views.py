@@ -111,8 +111,9 @@ def ChildSNotebookListVisu(request):
     return render(request, 'tablecom/ChildSNotebookListVisu.html', {'liste_carnets': ChildSNBs,'date':datetrans, 'CarrierList':CarrierList})
 
 def ChildSNotebookVisu(request,id_carnet):
-    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
+
     if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
+        CarrierList = GlobalCarrier(request)  # will carry all necessary variables (for notification, ...)
 
         carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
         print("Ouverture d'un carnet",id_carnet, carnet)
@@ -145,9 +146,10 @@ def Message_Contact_ListView(request, id_carnet):
     return render(request, 'tablecom/message_contact_list.html', locals())
 
 def NewArticle(request,id_carnet):
-    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
 
     if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
+        CarrierList = GlobalCarrier(request)  # will carry all necessary variables (for notification, ...)
+
         carnet=get_object_or_404(ChildSNotebook, id=id_carnet)
         id_of_current_user=request.user.pk
         premodelNA=Article(id_Professionnal=id_of_current_user)
@@ -176,7 +178,8 @@ def GlobalCarrier(request):
 
         CarrierList=[NumberOfMessagesNotifications,NumberOfFilNotifications]
     except:
-        CarrierList = ["n", "n"]
+        CarrierList = [0, 0]
+        
     return (CarrierList)
 
 def AdminTools(request):

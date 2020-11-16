@@ -7,11 +7,12 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import FormView
 from django.utils import timezone
 from django.contrib.messages.views import SuccessMessageMixin
-
+from tablecom.views import GlobalCarrier
 
 # Create your views here.
 def messageAboutTo(request, id_carnet, id_correspondant):
     # print("Appel pour le carnet ",id_carnet, "et le correspondant ",id_correspondant)
+    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
 
 
 

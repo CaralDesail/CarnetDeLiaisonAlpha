@@ -2,18 +2,32 @@ from django.shortcuts import render
 from notifications.models import *
 
 
+
+""" 
+
+Here are the differents modules/functions that will manage notification system : 
+First part is about common fonctions (CheckNCreateNotifField[will create new line in notification base],
+                                        StrinToDict[will ... convert string in dict !])
+Second part will manage global field "fil" notifications 
+Third part will manage private direct messages notification
+
+"""
+
+
 def CheckNCreateNotifField(request):  # will check if a "notification" entry exist for this user, if not create
-    # will be used for first connection to avoid notif bug (but can be replaced by a try except on notif ?)
+    # will be used for first connection to avoid notif bug (but can be replaced by a global try except on notif ?)
 
     try:
         # print("appel du check d'entrée de notif CheckNCreateNotifField pour l'user ", request.user.pk)
         entreeNotifIdUser = Notifications.objects.get(user_id=request.user.pk)  # will catch the userspecific line
         # print(entreeNotifIdUser)
 
-
     except:
-        # print("check d'entrée de notif : non trouvé donc création de la ligne")
-        Notifications.objects.create(user_id=request.user.pk)
+        try :
+            # print("check d'entrée de notif : non trouvé donc création de la ligne")
+            Notifications.objects.create(user_id=request.user.pk)
+        except:
+            print("User non connecté_ pas de création de ligne")
 
     return
 
@@ -34,6 +48,11 @@ def stringTodict(stringToWork):
     return dictCreated
 
 
+""" 2d part : 
+About notifications for common board 
+"""
+
+#update count in DB
 def UpdateNotifFilValue(dicoNotifNumberInFilByCarnet, id_carnet, NewValue, entryInNotifications):
     # will take a dictionnary with all fil notifications value (as value) by carnet (as key) and update id_carnet value
     # with NewValue
@@ -48,12 +67,12 @@ def UpdateNotifFilValue(dicoNotifNumberInFilByCarnet, id_carnet, NewValue, entry
     entryInNotifications.NotifFil = newString
     entryInNotifications.save()
 
+# will add one to notif_fil of each correspondent
+def notif_fil_add_one(request, id_carnet, list_of_correspondents):
 
-def notif_fil_add_one(request, id_carnet, list_of_correspondants):
-    # will add one to notif_fil of each correspondant
 
     # check if each correspondant has notif entry, and if not create
-    for correspondant in list_of_correspondants:
+    for correspondant in list_of_correspondents:
         try:
             # print("appel du check d'entrée de notif CheckNCreateNotifField pour le correspondant ", correspondant.id)
             entreeNotifIdUser = Notifications.objects.get(user_id=correspondant.id)  # will catch the userspecific line
@@ -64,7 +83,7 @@ def notif_fil_add_one(request, id_carnet, list_of_correspondants):
             Notifications.objects.create(user_id=correspondant.id)
 
     # check if the (x:x) exist, if not gives to NotifFil (x:1) value. if exist, increment value
-    for correspondant in list_of_correspondants:
+    for correspondant in list_of_correspondents:
         entreeNotifIdUser = Notifications.objects.get(user_id=correspondant.id)
         print("la valeur initiale de Notiffil : ", entreeNotifIdUser.NotifFil)
         dicoNotifNumberInFilByCarnet = stringTodict(entreeNotifIdUser.NotifFil)
@@ -82,7 +101,7 @@ def notif_fil_add_one(request, id_carnet, list_of_correspondants):
             entreeNotifIdUser.NotifFil += (id_carnet + ":1,")
             entreeNotifIdUser.save()
 
-
+# will set to 0 the amount of notif fil
 def notif_fil_reset(request,carnet_id):
     print("appel de la fonction pour mettre à 0 la NotifFil de carnet ID chez User")
 
@@ -105,7 +124,7 @@ def notif_fil_reset(request,carnet_id):
     entreeNotifIdUser.NotifFil = newString
     entreeNotifIdUser.save()
 
-
+# will get global count of fil notif for a specific user
 def notif_fil_global_count(request):
     entreeNotifIdUser = Notifications.objects.get(user_id=request.user.pk) #entry of user's notification table
     dicoTemp=stringTodict(entreeNotifIdUser.NotifFil)
@@ -114,7 +133,7 @@ def notif_fil_global_count(request):
         somme+=int(valeur)
     return somme
 
-
+# will get count of fil notif by CNB
 def notif_fil_by_CNB(request,carnet_id):
 
     try :
@@ -123,7 +142,13 @@ def notif_fil_by_CNB(request,carnet_id):
         dicoTemp=stringTodict(entreeNotifIdUser.NotifFil)
 
         number_of_notifs=dicoTemp[str(carnet_id)]
+
     except :
-        number_of_notifs ="n"
+        number_of_notifs =0
 
     return number_of_notifs
+
+
+""" 3d part : 
+About private direct messages
+"""
