@@ -29,6 +29,10 @@ def list_of_articles(string_of_articles):
     for article in listIDarticles:
         try :
             articleSel=Article.objects.get(id=article)
+            if articleSel.active != True :
+                continue
+            if articleSel.valid_art != True:
+                continue
             #print(articleSel.title)
             #print("les numero de l'auteur :",articleSel.id_Professionnal, "ce qui correspond à :",User.objects.get(pk=articleSel.id_Professionnal).first_name,User.objects.get(pk=articleSel.id_Professionnal).last_name)
             articleSel.auteur_first_name=User.objects.get(pk=articleSel.id_Professionnal).first_name
