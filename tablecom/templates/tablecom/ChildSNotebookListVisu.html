@@ -50,7 +50,7 @@
                                 <div class="col p-2  "><img src="{% static 'images/notif_mess_perso_white.svg' %}" class="img"></div>
 
                                 {% if carnet.notif_message != 0 %}
-                                <div class="col  ">  <h5><span class="badge badge-primary">{{carnet.notif_message}}</span></h5></div>
+                                <div class="col  pb-3 pt-3">  <h5><span class="badge badge-primary">{{carnet.notif_message}}</span></h5></div>
                                 {% else %}
                                 <div class="col pb-3 pt-3 ">  <h5><span class="badge badge-info">{{carnet.notif_message}}</span></h5></div>
                                 {% endif %}
