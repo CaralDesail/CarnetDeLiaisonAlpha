@@ -44,12 +44,80 @@
 <div class="list-group">
 
     {% for article in newListOfArticles %}
-    <a href="" class="list-group-item list-group-item-action">    <h4> {{article.title}} </h4> <small>
-        {{article.date}} par {{ article.auteur_first_name}} {{ article.auteur_last_name}}</small>
-        <div class="marge3"> <br>{{article.content}}</div> </a>
+
+        {% if article.active == 1 %}
+        <div class="list-group-item list-group-item-action m-1">
+            <div class="row">
+                <div class="col-11">
+                <h4> {{article.title}} </h4>
+                <small>{{article.date}} par {{ article.auteur_first_name}} {{ article.auteur_last_name}}</small>
+                </div>
+                <div class="col-1">
+
+                    {% if article.auteur_id == user.pk %}
+
+                        <button type="button" class="btn btn-primary modal-dialog-centered p-1 " data-toggle="modal" data-target="#DeleteModal{{ article.pk }}">
+                          <img class="img-fluid" alt="supprimer" src="/static/images/trash.svg"/>
+                        </button>
+
+                    {% else %}
+
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="marge3">
+                    <br>{{article.content}}
+                </div>
+            </div>
+        </div>
+
+            <!-- Modal -->
+        <div class="modal fade" id="DeleteModal{{ article.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <p>Êtes vous certain de vouloir supprimer ce message ? <br>Ceci est définitif.</p>
+                  Il sera remplacé par :
+                  <div class="container">
+                  <var><small>Commentaire du {{article.date}} par {{ article.auteur_first_name}} {{ article.auteur_last_name}}
+                  supprimé le XXX par son auteur.</small></var></div>
+              </div>
+              <div class="modal-footer mx-auto">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <a href="{% url 'DelArticle' carnet.id article.id %}">
+                  <button type="button" class="btn btn-primary">Oui, supprimer</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% else %} <!-- in case of deleted article -->
+        <div class="list-group-item list-group-item-action p-0 pl-4 m-0 ml-2 ">
+            <div class="row">
+                <small><small>
+                    <p class="ml-2">Commentaire du {{article.date}} par {{ article.auteur_first_name}} {{ article.auteur_last_name}}
+                    supprimé le {{ article.DeletedDate }} par son auteur.
+                    </p>
+                </small></small>
+            </div>
+        </div>
+
+        {% endif %}
 
     {% empty %}
         <p>Aucun article trouvé.</p>
 {% endfor %}
 </div></div>
+
+
+
 {% endblock %}

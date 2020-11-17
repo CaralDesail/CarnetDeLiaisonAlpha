@@ -24,6 +24,7 @@ urlpatterns = [
     path('Message_Contact_List/<id_carnet>',views.Message_Contact_ListView, name="Message_Contact_List"),
     path('NewCSNB', views.ChildSNotebookCreatView, name="ChildSNotebookCreatView"),
     path('NewArticle/<id_carnet>',views.NewArticle, name="NewArticle"),
+    path('DelArticle/<id_carnet>/<id_article>',views.DelArticle,name="DelArticle"),
     path('ProCreat', views.ProCreatView, name='ProCreat'),
     path('RLCreat', views.RLCreatView, name="RLCreat"),
     path('MyProfile',views.MyProfile, name="MyProfile"),

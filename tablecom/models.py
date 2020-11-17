@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 class ChildSNotebook(models.Model): #name of table that contain differents "carnets" for each child
@@ -38,15 +39,14 @@ class CategoriePro(models.Model):
 
 
 class Article(models.Model): #table of differents "notes", or "articles" that will be created by Pro or LR
-    active = models.BooleanField(default=True) #is active or not (suppressed ?)
+    active = models.BooleanField(default=True) #is active or not (deleted ?)
     id_Professionnal=models.IntegerField(verbose_name='Id Professionnel')
     title = models.CharField(max_length=255, verbose_name="Titre")
     content = models.TextField(null=False, verbose_name="Contenu")
-    date = models.DateTimeField(default=timezone.now,
+    date = models.DateTimeField(default=datetime.now(),
                                 verbose_name="Date de parution")
     valid_art=models.BooleanField(default=True) #validation or not of the article by legal Responsible
-    list_to_notify = models.TextField(null=True, verbose_name="Id des personnes notifiée") #list of differents "pro"
-                                                # that will be notified when article agreed by legal Responsible
+    DeletedDate = models.DateTimeField(verbose_name="Date de supression")
 
     class Meta:
         verbose_name = "article"
@@ -54,6 +54,7 @@ class Article(models.Model): #table of differents "notes", or "articles" that wi
 
     def __str__(self):
         return self.title
+
 
 class ContactUs(models.Model):
     title=models.CharField(max_length=255, verbose_name="Titre",blank=True, default="")

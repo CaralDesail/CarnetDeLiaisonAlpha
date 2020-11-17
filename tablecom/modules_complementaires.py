@@ -34,15 +34,24 @@ def list_of_articles(string_of_articles):
     for article in listIDarticles:
         try :
             articleSel=Article.objects.get(id=article)
-            if articleSel.active != True :
-                continue
+
             if articleSel.valid_art != True:
                 continue
             #print(articleSel.title)
             #print("les numero de l'auteur :",articleSel.id_Professionnal, "ce qui correspond à :",User.objects.get(pk=articleSel.id_Professionnal).first_name,User.objects.get(pk=articleSel.id_Professionnal).last_name)
+
             articleSel.auteur_first_name=User.objects.get(pk=articleSel.id_Professionnal).first_name
             articleSel.auteur_last_name=User.objects.get(pk=articleSel.id_Professionnal).last_name
+            articleSel.auteur_id=User.objects.get(pk=articleSel.id_Professionnal).id
+            if articleSel.active != True:  # if article is no longer active, it means that it has been deleted
+                articleSel.title = ""
+                articleSel.content = "Commentaire supprimé par son auteur"
+
+
             NewListArticles.append(articleSel)
+
+
+
         except:
             print("Impossible de récupérer l'item {0} : Vérifier que chaque ID existe".format(article))
 

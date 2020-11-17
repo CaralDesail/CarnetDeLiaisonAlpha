@@ -181,7 +181,7 @@ def NewArticle(request,id_carnet):
 
         carnet=get_object_or_404(ChildSNotebook, id=id_carnet)
         id_of_current_user=request.user.pk
-        premodelNA=Article(id_Professionnal=id_of_current_user)
+        premodelNA=Article(id_Professionnal=id_of_current_user, DeletedDate="2000-01-01 01:01:01.000000")
         form = NewArticleForm(request.POST or None, instance=premodelNA)
         if form.is_valid():
             carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
@@ -197,6 +197,25 @@ def NewArticle(request,id_carnet):
             carnet.save()
 
         return render(request, 'tablecom/NewArticle.html', locals())
+
+def DelArticle(request,id_carnet, id_article):
+
+    print("Après vérif des droits d'accès au carnet {0} d'une part, et que l'article {1} à supprimer à bien été écrit "
+          "par  {2} d'autre part".format(id_carnet,id_article,request.user.pk))
+    carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
+    article= get_object_or_404(Article, id=id_article)
+
+    if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)) and article.id_Professionnal==request.user.pk :
+        print("acces au carnet {0} ok".format(id_carnet))
+        article.active=False
+        article.DeletedDate=datetime.now()
+        article.save()
+
+    else :
+        print("Problème d'accès soit au carnet, soit à l'article dont vous n'êtes pas l'auteur")
+
+
+    return redirect('ChildSNotebookVisu', id_carnet=id_carnet)
 
 def GlobalCarrier(request):
     # will contain list of variables necessary in each page

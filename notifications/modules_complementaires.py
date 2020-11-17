@@ -131,7 +131,7 @@ def notif_fil_add_one(request, id_carnet, list_of_correspondents):
 
 # will set to 0 the amount of notif fil
 def notif_fil_reset(request, carnet_id):
-    print("appel de la fonction pour mettre à 0 la NotifFil de carnet ID chez User")
+    #print("appel de la fonction pour mettre à 0 la NotifFil de carnet ID chez User")
 
     # on récupère la ligne :
     entreeNotifIdUser = Notifications.objects.get(user_id=request.user.pk)  # entry of user's notification table
@@ -166,7 +166,7 @@ def notif_fil_global_count(request):
 # will get count of fil notif by CNB
 def notif_fil_by_CNB(request, carnet_id):
     try:
-        print("Recherche de notif pour", carnet_id)
+        #print("Recherche de notif pour", carnet_id)
         entreeNotifIdUser = Notifications.objects.get(user_id=request.user.pk)  # entry of user's notification table
         dicoTemp = stringTodict(entreeNotifIdUser.NotifFil)
 
@@ -241,7 +241,7 @@ def getGlobalCountOfDirectMessage(request):
     StringNotifsMessagesForUser=NotifTempLine.NotifMessages
 
     #number of concerned carnets:
-    print("ma string : ",StringNotifsMessagesForUser, "du type ",type(StringNotifsMessagesForUser))
+    #print("ma string : ",StringNotifsMessagesForUser, "du type ",type(StringNotifsMessagesForUser))
 
     if "," in StringNotifsMessagesForUser:
         splitedStringByCarnets = StringNotifsMessagesForUser[:-1].split(",") #:-1 to delete coma
@@ -293,12 +293,12 @@ def notif_message_by_CNB_and_Correspondant(request,carnet_id,correspondant_id):
         #print("Erreur de récupération des notifications en message de ce carnet : soit bug, soit vide")
         ValueToReturn=0
 
-    print("La valeur dans ces conditions est : ",ValueToReturn)
+    #print("La valeur dans ces conditions est : ",ValueToReturn)
 
     return ValueToReturn
 
 def NotifMessagesReset(request,id_carnet,id_correspondant):
-    print("RAZ pour le carnet ", id_carnet, "et le correspondant ", id_correspondant, "chez user", request.user.pk)
+    #print("RAZ pour le carnet ", id_carnet, "et le correspondant ", id_correspondant, "chez user", request.user.pk)
 
     NotifTempLine = Notifications.objects.get(user_id=request.user.pk)
     NotifTempDict = stringTodict(NotifTempLine.NotifMessages)
@@ -311,7 +311,7 @@ def NotifMessagesReset(request,id_carnet,id_correspondant):
 
 
         listEnInt.remove(int(id_correspondant))
-        print("nouvelle liste : ", listEnInt)
+        #print("nouvelle liste : ", listEnInt)
         ReString = listToString([str(x) for x in listEnInt])
         # print("La nouvelle string à injecter : ",ReString)
         NotifTempDict[id_carnet] = ReString
@@ -323,11 +323,12 @@ def NotifMessagesReset(request,id_carnet,id_correspondant):
             if valeur == "":
                 continue
             newString += (cle + ":" + valeur + ",")
-        print("donc la nouvelle string modifiée : ",newString)
+        #print("donc la nouvelle string modifiée : ",newString)
         NotifTempLine.NotifMessages = newString
         NotifTempLine.save()
     except :
-        print("Pas de suppression possible, mais c'est peut être que la liste est nulle ?")
+        print("")
+        #print("Pas de suppression possible, mais c'est peut être que la liste est nulle ?")
 
 
 
