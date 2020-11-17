@@ -36,8 +36,30 @@ def ContactUs(request):
         envoi=True
         form.save()
         try:
-            send_a_mail("Envoi du questionnaire ContactUs depuis le site Handebook",form)
+            formTitle=form.cleaned_data['title']
+            formContent=form.cleaned_data['content']
+            formEmail=form.cleaned_data['email']
+            formUsername=form.cleaned_data['username']
+            formFirst_name=form.cleaned_data['first_name']
+            formLast_name=form.cleaned_data['last_name']
+
+            formPhone=form.cleaned_data['phone']
+            formRLouPro=form.cleaned_data['RLorPro']
+            formStatusRL=form.cleaned_data['statusRL']
+            formRolePro=form.cleaned_data['rolePro']
+            formChildAccess=form.cleaned_data['child_access_asked']
+
+            stringTosend="Envoi du formulaire Contact Us :\n "+ "Titre = " +formTitle+"\n Contenu : "+formContent+\
+                         "\n Username : "+formUsername+"\n Email : "+formEmail+\
+                         "\n First Name : "+formFirst_name+"\n Last Name : "+formLast_name+"\n Telephone : "+formPhone+\
+                         "\n RLorPro : " + str(formRLouPro) +"\n Status RL : " + str(formStatusRL) + "\n Role Pro : " + str(formRolePro)+\
+                         "\n Demande d'accès aux enfants : " + formChildAccess
+
+
+
+            send_a_mail("Envoi du questionnaire ContactUs depuis le site Handebook",stringTosend)
         except:
+            raise
             print("Problème : Mail non envoyé")
         #print(form.data)
     return render(request, 'tablecom/ContactUs.html',locals())

@@ -62,4 +62,5 @@ def PermCreationAccessLastEntry(model_transmis):
     )
 
 def send_a_mail(subject,content):
-    send_mail(subject,content,'devtemp@alaincarrot.com','devtemp@alaincarrot.com')
+    send_mail(subject,content,'devtemp@alaincarrot.com',['devtemp@alaincarrot.com'],fail_silently=False,)
+    print("Message bien envoyé en mail")
