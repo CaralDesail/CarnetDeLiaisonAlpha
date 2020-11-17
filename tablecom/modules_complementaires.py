@@ -2,6 +2,7 @@ from .forms import *
 from django.http import request
 from .models import *
 from notifications.modules_complementaires import notif_message_by_CNB_and_Correspondant
+from django.core.mail import send_mail
 
 def list_of_prof(request,listStringId,id_carnet):
     print("Liste en string : ",listStringId)
@@ -59,3 +60,6 @@ def PermCreationAccessLastEntry(model_transmis):
         name='Acces to CSNB number {0}'.format(lastId),
         content_type=content_type,
     )
+
+def send_a_mail(content):
+    send_mail('Mail envoyé depuis le site HandeBook',content,'devtemp@alaincarrot.com','devtemp@alaincarrot.com')

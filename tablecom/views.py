@@ -35,6 +35,10 @@ def ContactUs(request):
         print("Formulaire validé")
         envoi=True
         form.save()
+        try:
+            send_a_mail(form)
+        except:
+            print("Problème : Mail non envoyé")
         #print(form.data)
     return render(request, 'tablecom/ContactUs.html',locals())
 
