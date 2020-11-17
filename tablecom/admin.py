@@ -15,6 +15,8 @@ class ChildSNotebookAdmin(admin.ModelAdmin):
 class CategorieProAdmin(admin.ModelAdmin):
     list_display = ('id','name')
 
+
+
 class ProfilAdmin(admin.StackedInline):
     model = Profil
     can_delete = False

@@ -204,14 +204,14 @@ def GlobalCarrier(request):
         NumberOfFilNotifications = notif_fil_global_count(request)
 
     except:
-        NumberOfFilNotifications = "n"
+        NumberOfFilNotifications = "0"
 
 
     try :
         NumberOfMessagesNotifications=getGlobalCountOfDirectMessage(request)
     except :
         raise
-        NumberOfMessagesNotifications="n"
+        NumberOfMessagesNotifications="0"
 
     CarrierList = [NumberOfMessagesNotifications, NumberOfFilNotifications]
         

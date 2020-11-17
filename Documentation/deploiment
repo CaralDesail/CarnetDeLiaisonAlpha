@@ -1,0 +1,5 @@
+Pour le déploiment :
+1. Ne pas oublier de faire la migration de la DB
+2. Créer un professionnel NA avec id 0, puis rentrer tous les professionnels selon liste souhaitée
+3. Créer groupes [id[1]=SuperUser, id[2]=Professionnel, id[3]=Responsable légal
+4. Créer superuser avec console
