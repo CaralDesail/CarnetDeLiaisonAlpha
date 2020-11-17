@@ -36,7 +36,7 @@ def ContactUs(request):
         envoi=True
         form.save()
         try:
-            send_a_mail(form)
+            send_a_mail("Envoi du questionnaire ContactUs depuis le site Handebook",form)
         except:
             print("Problème : Mail non envoyé")
         #print(form.data)

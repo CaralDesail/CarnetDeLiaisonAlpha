@@ -61,5 +61,5 @@ def PermCreationAccessLastEntry(model_transmis):
         content_type=content_type,
     )
 
-def send_a_mail(content):
-    send_mail('Mail envoyé depuis le site HandeBook',content,'devtemp@alaincarrot.com','devtemp@alaincarrot.com')
+def send_a_mail(subject,content):
+    send_mail(subject,content,'devtemp@alaincarrot.com','devtemp@alaincarrot.com')
