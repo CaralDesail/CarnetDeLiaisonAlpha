@@ -25,7 +25,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/static/favicons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
-        <link rel="manifest" href="/manifest.json">
+        <link rel="manifest" href="/static/manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
@@ -50,12 +50,12 @@
 
             {% if user.is_authenticated %}
 
-<div class="container" style="background:#ffbaba !important;">
+<div class="container rounded" style="background:#ffbaba !important;">
 
     <div class="d-flex flex-wrap align-items-center"> <!-- Boite du bandeau du haut qui va mettre le premier élément à gauche, et les autres à distance à droite -->
           <div class="mr-auto p-3 ">
             <div class="d-flex justify-content-start">
-                <div class="p-2"><a href="{% url 'accueil' %}"><img src="/static/images/home.svg" class="img-fluid"></a></div>
+                <div class="p-2"><a href="{% url 'accueil' %}"><img src="/static/images/new_home.svg" class="img-fluid"></a></div>
                 <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary d-none d-lg-block"><p>{{ user.email }}</p></h6></div>
             </div>
 

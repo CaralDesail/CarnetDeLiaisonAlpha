@@ -1,5 +1,12 @@
 {
- "name": "App",
+ "default_locale": "fr",
+
+ "description": "HandeBook est une plateforme d'échanges entre professionnels de santé et de l'éducation.",
+
+ "manifest_version": 0.1,
+
+ "name": "HandeBook",
+
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
