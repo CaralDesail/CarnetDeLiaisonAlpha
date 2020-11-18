@@ -1,5 +1,7 @@
 
 /* custom fonts */
+
+/* old css
 @font-face
 {
     font-family: 'Andika';
@@ -11,5 +13,12 @@
 body
 {
     font-family: 'Andika',Verdana, Tahoma;
+    font-size: 1.3em;
+}
+*/
+
+body
+{
+    font-family: Verdana, Tahoma;
     font-size: 1.3em;
 }
