@@ -52,13 +52,14 @@
                 <h4> {{article.title}} </h4>
                 <small>{{article.date}} par {{ article.auteur_first_name}} {{ article.auteur_last_name}}</small>
                 </div>
-                <div class="col-1">
+                <div class="col-1-nowrap">
 
                     {% if article.auteur_id == user.pk %}
 
-                        <button type="button" class="btn btn-primary modal-dialog-centered p-1 " data-toggle="modal" data-target="#DeleteModal{{ article.pk }}">
-                          <img class="img-fluid" alt="supprimer" src="/static/images/trash.svg"/>
+                        <button type="button" class="btn btn-primary p-1 d-inline-block" data-toggle="modal" data-target="#DeleteModal{{ article.pk }}">
+                          <img class="img w-100" alt="supprimer" src="/static/images/trash.svg"/>
                         </button>
+
 
                     {% else %}
 

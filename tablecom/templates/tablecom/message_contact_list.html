@@ -14,7 +14,7 @@
   <ul class="list-group">
     <li class="list-group-item list-group-item-warning"><h4>Responsables légaux</h4></li>
   {% for RL in newListOfRL %}
-  <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between flex-wrap"><div>{{RL.id}}</div>
+  <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between flex-wrap">
     <div><h5>{{RL.first_name}} {{RL.last_name}}</h5></div>
     <div>{{RL.profil.statusRL}}</div>
     <div>
@@ -55,7 +55,7 @@
   <li class="list-group-item list-group-item-info"><h4>Liste des professionnels</h4></li>
   {% for prof in newListOfProf %}
   <li class="list-group-item list-group-item-secondary">
-    <div class="d-flex justify-content-between flex-wrap"><div>{{prof.id}}</div>
+    <div class="d-flex justify-content-between flex-wrap">
     <div><h5>{{prof.first_name}} {{prof.last_name}}</h5></div>
     <div>{{prof.RoleProText}}</div>
     <div>

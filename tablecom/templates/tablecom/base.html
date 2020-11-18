@@ -56,10 +56,16 @@
           <div class="mr-auto p-3 ">
             <div class="d-flex justify-content-start">
                 <div class="p-2"><a href="{% url 'accueil' %}"><img src="/static/images/home.svg" class="img-fluid"></a></div>
-                <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary"><p>{{ user.email }}</p></h6></div>
+                <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary d-none d-lg-block"><p>{{ user.email }}</p></h6></div>
+            </div>
+
+          </div>
+          <div class="p d-md-none"><!-- hide on screens larger than lg -->
+            <div class="d-flex flex-column">
+              <a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger m-1"><img src="{% static 'images/power.svg' %}" class="img"></button></a>
+              <a href="{% url 'MyProfile' %}"><button type="button" class="btn btn-info  m-1"><img src="{% static 'images/gear.svg' %}" class="img"></button></a>
             </div>
           </div>
-
 
           <div class="p-3 ">
 
@@ -84,12 +90,13 @@
           </div>
 
 
-          <div class="p- ">
+          <div class="p d-none d-md-block"><!-- only show on screens bigger than lg -->
             <div class="d-flex flex-column">
               <div class="p-2"><a href="{% url 'MyProfile' %}"><button type="button" class="btn btn-info btn-lg">Mes préférences</button></a></div>
               <div class="p-2"><a href="{% url 'deconnexion' %}"><button type="button" class="btn btn-danger btn-block btn-lg">Se déconnecter</button></a></div>
             </div>
           </div>
+
     </div>
 </div>
             {% else %}

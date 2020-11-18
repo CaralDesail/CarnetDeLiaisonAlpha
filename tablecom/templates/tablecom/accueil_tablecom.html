@@ -57,7 +57,7 @@
     <div class="d-flex flex-wrap align-items-center"> <!-- Boite  du bandeau du haut qui va mettre le premier élément à gauche, et les autres à distance à droite -->
           <div class="mr-auto p-2 ">
             <div class="d-flex justify-content-start">
-                <div class="p-2"><a href="{% url 'accueil' %}"><img src="{% static 'images/logoHandEbookCouleurSmall.png' %}" class="img-fluid "></a></div>
+                <div class="p-2"><a href="{% url 'accueil' %}"><img src="{% static 'images/logoHandEbookCouleurSmall.png' %}" class="img-fluid " alt="Logo de Handebook montrant des enfants soutenus par une main à l'intérieur d'un téléphone"></a></div>
                 <div class="p-2"><h4 class="text-secondary">{{ user.first_name }} {{ user.last_name }}</h4><h6 class="text-secondary"><p>{{ user.email }}</p></h6></div>
             </div>
           </div>
@@ -83,7 +83,7 @@
 
 
 
-             <div class="container" margin-right="auto" margin-left="auto">
+             <div class="container" >
 
                 <p></p>
 
@@ -105,22 +105,24 @@
                 </div>
 
                  <div>
-                    <article >
-                        <div class="row justify-content-md-center">
+                        <div class="row justify-content-md-center mb-0 pb-0">
                         <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fpartenaireinclusionscolaire%2Fvideos%2F2440013289624848%2F&show_text=false&width=560" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" allowFullScreen="true"></iframe>
                         </div>
-                    </article>
-                    <article>
-                    <p></p>
-                        <div class="row justify-content-md-center"><a href="{% url 'ContactUs' %}"><button type="button" class="btn btn-primary btn-lg">S'inscrire</button></a></div>
-                        <p class="centrage_simple_inline">En créant un compte, vous acceptez notre <a href="#" >Charte</a> et nos <a href="#" >CGU</a>.</p>
-                    </article>
-                     </div>
+
+                        <div class="d-flex justify-content-center mt-0 pt-1 mb-4">
+                            <a href="{% url 'ContactUs' %}" >
+                                <button type="button" class="btn btn-primary btn-lg">S'inscrire</button>
+                            </a>
+                        </div>
+                        <p>En créant un compte, vous acceptez notre <a href="#" >Charte</a> et nos <a href="#" >CGU</a>.</p>
+
+                 </div>
+
                 <footer>
                     <p class="footer_licence">© 2020 Hand eBook et contributeurs individuels.</p>
                 </footer>
-            </div>
 
+            </div>
 
         {% endif %}
 
