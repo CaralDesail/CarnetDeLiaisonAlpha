@@ -14,8 +14,10 @@ def list_of_prof(request,listStringId,id_carnet):
     for prof in listIdprofs:
         try:
             ProfSel=User.objects.get(id=prof)
-            print(type(ProfSel))
             print(ProfSel.first_name,' ', ProfSel.last_name, ' ',ProfSel.email)
+            ProfSel.RoleProText=CategoriePro.objects.get(id=ProfSel.profil.rolePro_id).name
+            print(ProfSel.RoleProText)
+
             ProfSel.NotifMessage = notif_message_by_CNB_and_Correspondant(request, id_carnet, ProfSel.pk)
             NewListProfs.append(ProfSel)
         except:

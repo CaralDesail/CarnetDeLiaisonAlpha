@@ -159,18 +159,19 @@ def ChildSNotebookVisu(request,id_carnet):
         return render(request, 'tablecom/ChildSNotebook.html', locals())
 
 def Message_Contact_ListView(request, id_carnet):
-    CarrierList=GlobalCarrier(request)#will carry all necessary variables (for notification, ...)
+    CarrierList = GlobalCarrier(request)  # will carry all necessary variables (for notification, ...)
+
     if request.user.has_perm("tablecom.CSNB{0}_access".format(id_carnet)):
         #call the list of contacts
-        print("le carnet appelé est ",id_carnet)
+        #print("le carnet appelé est ",id_carnet)
         carnet = get_object_or_404(ChildSNotebook, id=id_carnet)
         listProfString = carnet.id_prof_auth  # catch list of id of profs
         newListOfProf = list_of_prof(request,listProfString,id_carnet)  # call external function that returns list of contacts
-        print("Liste des pros : ",newListOfProf)
+        #print("Liste des pros : ",newListOfProf)
 
         listRLString = carnet.id_RespLeg # catch list of id of RL
         newListOfRL = list_of_prof(request,listRLString,id_carnet) # use same function that return list of RL
-        print("Liste des RL", newListOfRL)
+        #print("Liste des RL", newListOfRL)
 
         return render(request, 'tablecom/message_contact_list.html', locals())
 

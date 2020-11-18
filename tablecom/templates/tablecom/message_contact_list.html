@@ -16,7 +16,7 @@
   {% for RL in newListOfRL %}
   <li class="list-group-item list-group-item-secondary"><div class="d-flex justify-content-between flex-wrap"><div>{{RL.id}}</div>
     <div><h5>{{RL.first_name}} {{RL.last_name}}</h5></div>
-    <div>{{RL.email}}</div>
+    <div>{{RL.profil.statusRL}}</div>
     <div>
 
             {% if user.pk != RL.id %}
@@ -57,7 +57,7 @@
   <li class="list-group-item list-group-item-secondary">
     <div class="d-flex justify-content-between flex-wrap"><div>{{prof.id}}</div>
     <div><h5>{{prof.first_name}} {{prof.last_name}}</h5></div>
-    <div>{{prof.email}}</div>
+    <div>{{prof.RoleProText}}</div>
     <div>
             {% if user.pk != prof.id %}
         <a href="{% url 'MessageAboutTo' carnet.id prof.id %}">
