@@ -1,0 +1,15 @@
+
+/* custom fonts */
+@font-face
+{
+    font-family: 'Andika';
+    src: url('font/Andika-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body
+{
+    font-family: 'Andika',Verdana, Tahoma;
+    font-size: 1.3em;
+}
